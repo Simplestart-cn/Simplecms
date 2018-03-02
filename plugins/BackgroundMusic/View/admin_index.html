@@ -1,0 +1,60 @@
+<admintpl file="header"/>
+<body>
+<div class="wrap js-check-wrap">
+  <ul class="nav nav-tabs">
+     <li><a href="javascript:history.go(-1)"><i class="fa fa-reply fa-fw"></i>返回</a></li>
+     <li class="active"><a>背景音乐管理</a></li>
+  </ul>
+  <div class="common-form">
+
+        <form method="post" class="form-horizontal js-ajax-form" action="{:sp_plugin_url('BackgroundMusic://AdminIndex/setting_post')}">
+             <!--隐藏部分-->
+             
+             <input type="hidden" name="id" value="{$id}" readonly>
+             <input type="hidden" name="config[musictheme]" value="{$plugins.musictheme}">
+          
+             <input type="hidden" name="config[position]" value="{$plugins.position}">  
+             <input type="hidden" name="config[top]" value="{$plugins.top}">                                                       
+                                                                                
+             <!--<if condition="empty($plugins['qrcode'])">
+                    <img src="__PLUGINTMPL__/assets/images/headicon_50.png" id="thumb_preview" width="width: 50px;" style="cursor: hand" />
+                    <else />
+                    <img src="{$plugins.music}" id="thumb_preview" width="100px;" style="cursor: hand"/>
+                    </if>-->
+        
+           <div class="control-group">
+                
+            	<label class="control-label" for="qrcode">背景音乐</label>
+                <div class="controls">
+                <input type="text" name="config[music]" class="text input-large" value="{$plugins.music}" id="thumb">
+                <a href="javascript:void(0);" class="btn btn-small" onClick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
+               <i class="fa fa-cloud-upload"></i>
+                    
+									</a>
+                                    <if condition="empty($plugins['music'])">
+                                     <else />
+                             <input type="button" class="btn btn-small" onClick="$('#thumb_preview').attr('src','__PLUGINTMPL__/assets/images/headicon_50.png');$('#thumb').val('');return false;" value="取消音乐">
+                             </if>
+                    
+                   	
+                   						
+                </div>
+                
+            
+                          
+            </div>        
+        
+        
+           
+            <div class="form-actions">
+            
+                <button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
+            
+            </div>
+		</form>
+  </div>
+</div>
+<script src="__PUBLIC__/js/common.js?"></script>
+<script type="text/javascript" src="__PLUGINTMPL__assets/js/admin.js"></script>
+</body>
+</html>

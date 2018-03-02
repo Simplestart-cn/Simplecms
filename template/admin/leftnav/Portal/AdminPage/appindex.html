@@ -1,0 +1,111 @@
+<admintpl file="header" />
+<style>
+.pageapp-list{    
+    list-style-type: none;
+    margin: 10px 10px;
+    padding: 0;
+
+	}	
+.pageapp-list li{    
+    width: 100px;
+    height: 100px;
+    background-color: #2F5677;
+	float: left;
+	text-align: center;
+    margin-right: 30px;
+    margin-bottom: 30px;
+	border-radius: 10px;
+	position: relative;
+	}
+.pageapp-list li .btn-bjck{ 
+display:none;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 0;
+    left: 0;
+	
+border-radius: 10px;
+overflow:hidden;
+
+}	
+.pageapp-list li.open .btn-bjck{    
+    display:block;
+    
+	
+	}
+.pageapp-list li .btn-bjck a{
+color: #fff;
+display: block;
+padding: 22px 10px;
+padding-bottom: 58px;
+	}
+	    
+.pageapp-list li .btn-bjck a:hover{
+text-decoration: none;
+background-color: rgba(0, 0, 0, 0);
+ 
+	}    
+.pageapp-list li i{
+	margin-top: 15px;
+	color: #fff;
+    font-size: 42px;
+    display: block;
+    height: 42px;
+	}
+.pageapp-list li span{
+	color: #fff;
+	}		  
+</style>  
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('AdminPageapp/index')}">页面管理</a></li>
+		
+		</ul>      
+			<ul class="pageapp-list">
+               <foreach name="pages" item="vo">
+                        
+                    <li>
+                        <div class="btn-bjck">
+                        
+                        <a href="{:U('AdminPage/appedit',array('id'=>$vo['id']))}">{:L('EDIT')}</a>
+                        <a href="{:U('portal/page/index',array('id'=>$vo['id']))}" target="_blank" title="{$vo.page_title}" style="padding: 4px;">{:L('VIEW')}</a>
+                        </div>
+                        
+                        <i class="fa fa-tv"></i> 
+                        <span>{$vo.page_title}</span>    
+                        
+                    </li>                        
+                    
+                </foreach>
+             </ul>
+			<div class="pagination">{$Page}</div>
+		
+        
+<script>
+$(".pageapp-list li").hover(function(){
+			$(this).addClass("open");
+		},function(){
+			$(this).removeClass("open");
+		});
+</script>        
+        
+        
+		
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script>
+		setCookie('refersh_time', 0);
+		function refersh_window() {
+			var refersh_time = getCookie('refersh_time');
+			if (refersh_time == 1) {
+				window.location.reload();
+			}
+		}
+		setInterval(function() {
+			refersh_window()
+		}, 2000);
+	</script>
+</body>
+</html>

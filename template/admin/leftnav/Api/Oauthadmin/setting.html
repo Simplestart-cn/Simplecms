@@ -1,0 +1,243 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#A" data-toggle="tab">QQ登录设置</a></li>
+			<li><a href="#B" data-toggle="tab">微博登录设置</a></li>
+            <li><a href="#C" data-toggle="tab">微信登录设置</a></li>
+            <li><a href="#D" data-toggle="tab">微信小程序设置</a></li>
+            <li><a href="#E" data-toggle="tab">阿里短信设置</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-forms" action="{:U('oauthadmin/setting_post')}">
+        <fieldset>
+			<div class="tabbable">
+				<div class="tab-content">
+					
+                    
+                   <div class="row-fluid tab-pane active" id="A">			
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th width="200">APPkey</th>
+                                    <td>
+                                        <input type="text" name="qq_key" value="{$Think.config.SP_SDK_QQ.APP_KEY}" class="form-control"/>              
+                                       
+                                        <span style="color: red;">*</span>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>APPsecret</th>
+                                    <td>
+                                       <input type="text" name="qq_sec" value="{$Think.config.SP_SDK_QQ.APP_SECRET}" class="form-control"/>
+                                    
+                                       
+                                        
+                                    </td>
+                                </tr>  
+                                
+                                <tr>
+                                    <th>授权回调页</th>
+                                    <td>
+                                        <div style="margin-top:5px;">{:sp_get_host()}/index.php</div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>获取地址</th>
+                                    <td>
+                                        <div style="margin-top:5px;"><a href="http://connect.qq.com/" target="_blank">{:L('CLICK_HERE')}</a>{:L('GET_QQ_APPKEY_AND_APPSECRET')}</div>
+                                        
+                                    </td>
+                                </tr>
+                                                                                      
+                            </tbody>
+                        </table>
+                   </div>
+
+                        
+                   <div class="row-fluid tab-pane" id="B">			
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th width="200">APPkey</th>
+                                    <td>
+                                        <input type="text" name="sina_key" value="{$Think.config.SP_SDK_SINA.APP_KEY}" class="form-control"/>              
+                                       
+                                        <span style="color: red;">*</span>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>APPsecret</th>
+                                    <td>
+                                       <input type="text" name="sina_sec" value="{$Think.config.SP_SDK_SINA.APP_SECRET}" class="form-control"/>
+                                    
+                                       
+                                        
+                                    </td>
+                                </tr>  
+                                
+                                <tr>
+                                    <th>{:L('CALLBACK_URL')}</th>
+                                    <td>
+                                        <div style="margin-top:5px;">{$callback_uri_root}sina</div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('CANCEL_CALLBACK_URL')}</th>
+                                    <td>
+                                        <div style="margin-top:5px;">{:sp_get_host()}</div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>获取地址</th>
+                                    <td>
+                                        <div style="margin-top:5px;"><a href="http://open.weibo.com/" target="_blank">{:L('CLICK_HERE')}</a> {:L('GET_WEIBO_APPKEY_AND_APPSECRET')}</div>
+                                        
+                                    </td>
+                                </tr>                                                      
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row-fluid tab-pane" id="C">         
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th width="200">APPkey</th>
+                                    <td>
+                                        <input type="text" name="wechat_key" value="{$Think.config.SP_SDK_WECHAT.APP_KEY}" class="form-control"/>              
+                                       
+                                        <span style="color: red;">*</span>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>APPsecret</th>
+                                    <td>
+                                       <input type="text" name="wechat_sec" value="{$Think.config.SP_SDK_WECHAT.APP_SECRET}" class="form-control"/>
+                                    </td>
+                                </tr>  
+                                
+                                <tr>
+                                    <th>{:L('CALLBACK_URL')}</th>
+                                    <td>
+                                        <div style="margin-top:5px;">{$callback_uri_root}weixin</div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>获取地址</th>
+                                    <td>
+                                        <div style="margin-top:5px;">
+                                        <a href="http://mp.weixin.qq.com/" target="_blank">{:L('CLICK_HERE')}</a>
+                                        </div> 
+                                    </td>
+                                </tr>                                                      
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row-fluid tab-pane" id="D">         
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th width="200">APPid</th>
+                                    <td>
+                                        <input type="text" name="wxapplet_id" value="{$Think.config.SP_SDK_WXAPPLET.APP_ID}" class="form-control"/>              
+                                       
+                                        <span style="color: red;">*</span>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>APPsecret</th>
+                                    <td>
+                                       <input type="text" name="wxapplet_sec" value="{$Think.config.SP_SDK_WXAPPLET.APP_SECRET}" class="form-control"/>
+                                    
+                                       
+                                        
+                                    </td>
+                                </tr>  
+                                
+                                <tr>
+                                    <th>{:L('CALLBACK_URL')}</th>
+                                    <td>
+                                        <div style="margin-top:5px;">{:sp_get_host()}/index.php</div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>获取地址</th>
+                                    <td>
+                                        <div style="margin-top:5px;">
+                                        <a href="http://mp.weixin.qq.com/" target="_blank">{:L('CLICK_HERE')}</a>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>                                                      
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row-fluid tab-pane" id="E">         
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th width="200">APPkey</th>
+                                    <td>
+                                        <input type="text" name="alisms_key" value="{$Think.config.SP_SDK_ALISMS.APP_KEY}" class="form-control"/>              
+                                       
+                                        <span style="color: red;">*</span>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>APPsecret</th>
+                                    <td>
+                                       <input type="text" name="alisms_sec" value="{$Think.config.SP_SDK_ALISMS.APP_SECRET}" class="form-control"/> 
+                                    </td>
+                                </tr>  
+                                
+                                <tr>
+                                    <th>签名</th>
+                                    <td>
+                                        <input type="text" name="alisms_name" value="{$Think.config.SP_SDK_ALISMS.SIGN_NAME}" class="form-control"/> 
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>获取地址</th>
+                                    <td>
+                                        <div style="margin-top:5px;">
+                                        <a href="http://www.aliyun.com/" target="_blank">{:L('CLICK_HERE')}</a>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>                                                      
+                            </tbody>
+                        </table>
+                    </div>
+
+                    
+					
+				</div>
+			</div>
+			<div class="form-actions" style="padding:20px;">
+				<button type="submit" class="btn btn-primary btn-block js-ajax-submit">{:L('SAVE')}</button>
+			</div>
+        </fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

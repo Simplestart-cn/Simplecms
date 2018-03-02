@@ -1,0 +1,136 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('AdminModel/index')}">分类模型</a></li>
+			<li class="active"><a href="{:U('AdminModel/edit')}">编辑模型</a></li> 
+		</ul>
+		<form class="form-horizontal js-ajax-form" action="{:U('AdminModel/edit_post')}" method="post">
+			<div class="tabbable">
+		        <div class="tab-content">
+                	
+                    
+                  <div class="row-fluid">			
+                        <table class="table table-bordered">
+                            
+                            <tr>
+                                <th width="88px">模型名称</th>
+                                <td>
+                                    <input type="hidden" name="post[id]" class="form-control" value="{$post.id}"> 
+                                    <input type="text" name="model_name" class="form-control" style="min-width:220px;" value="{$post.model_name}">
+                                   
+                                </td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <th>模型字段</th>
+                                <td>
+                                    
+      								
+                                  <table id="tbl1">
+                                  		<foreach name="model_config['config']" item="vo">
+										<tr id="row{$vo}">
+                                        <td>
+                                        <span>类型</span>
+                                        <select name="config_type[]" class="form-control" style="min-width:80px;" required="">
+                                        <option value="input" <eq name="vo.type" value="input">selected</eq>>段字段</option>
+                                        <option value="textarea" <eq name="vo.type" value="textarea">selected</eq>>文本</option>
+                                        <option value="file" <eq name="vo.type" value="file">selected</eq>>文件</option>
+                                        </select>
+                                        <span>名称</span><input name="config_name[]" class="form-control" type="text" value="{$vo.name}">
+                                        <span>变量</span><input name="config_field[]" class="form-control" type="text" value="{$vo.field}">
+                                        <span>默认值</span><input name="config_value[]" class="form-control" type="text" value="{$vo.value}">
+                                        </td>
+                                        <td>
+                                        <input type="button" class="btn btn-danger btn-sm" id="btnDel{$vo}" value="删除">
+                                        </td>
+                                        </tr>
+                                        
+										</foreach>
+                                  </table>
+                                  
+                                  <div style="overflow: hidden;"><input type="button" class="btn btn-info btn-xs" style="padding: 5px 96px;" value="新增" onClick="addByScript()"/></div>
+                                   
+                                </td>
+                            </tr>
+                            
+                            
+                            
+                        </table>
+                  </div>
+<style>
+.row-fluid .table-bordered>tbody>tr>td input, .row-fluid .table-bordered>tbody>tr>td select{    
+    height: 32px;
+	    padding: 0px 8px;
+float: inherit;
+    float: none;
+    display: inline-block;
+    display: -webkit-inline-box;
+    display: initial;
+    display: inline;
+	    margin-right: 8px;
+		}
+#tbl1 tbody tr{margin: 10px 0;
+      display: block;
+    overflow: hidden;
+    }
+#tbl1 tbody tr td{
+    display: block;float: left;}
+table tr td span {
+padding: 6px 4px;
+    color: #666;
+   
+    font-size: 14px;
+    background-color: #CCC;
+    margin-right: 0px;
+}
+}
+
+</style>	
+
+
+<!---->	          
+		          <script>
+      var count = 0;   
+      function addByScript() {
+        var table = document.getElementById("tbl1");
+        var newRow = table.insertRow(table.rows.length);
+        newRow.id = "row" + count;
+        
+        var contentCell = newRow.insertCell(-1);
+        contentCell.innerHTML = '<span>类型</span><select name="config_type[]" class="form-control" style="min-width:80px;" required><option value="input" selected>段字段</option><option value="textarea">文本</option><option value="file">文件</option></select> <span>名称</span ><input name="config_name[]" class="form-control" type="text" /> <span>变量</span><input  name="config_field[]" class="form-control" type="text" /> <span>默认值</span><input name="config_value[]" class="form-control" type="text"/>';
+        contentCell = newRow.insertCell(-1);
+        
+        var delBtn = document.createElement("input");
+        delBtn.type = "button";
+        delBtn.className = "btn btn-danger btn-sm";
+        delBtn.id = "btnDel"+count;
+        delBtn.value = "删除";
+        delBtn.onclick = new Function("del(this)");
+        contentCell.appendChild(delBtn);
+      
+        count++;
+      }
+      
+      function del(obj) {
+        var row = obj.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }      
+    </script>
+
+
+
+		          
+		        </div>
+		    </div>
+		    <div class="form-actions">
+		     	<button class="btn btn-primary js-ajax-submit"type="submit">{:L('EDIT')}</button>
+		      	<a class="btn" href="{:U('AdminModel/index')}">{:L('BACK')}</a>
+		    </div>
+		</form>
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

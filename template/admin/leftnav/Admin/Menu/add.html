@@ -1,0 +1,116 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('menu/index')}">{:L('ADMIN_MENU_INDEX')}</a></li>
+			<li class="active"><a href="{:U('menu/add')}">{:L('ADMIN_MENU_ADD')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('Menu/add_post')}">
+        
+        
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">上级</th>
+                            <td>
+                                <select name="parentid" class="form-control">
+                                    <option value="0">作为一级菜单</option>
+                                    {$select_categorys}
+                                </select>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>名称</th>
+                            <td>
+                                <input type="text" name="name" class="form-control">
+                                <span data-toggle="tooltip" data-placement="right" title="菜单名称"><i class="fa fa-question fa-2x"></i></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>应用</th>
+                            <td>
+                            	<input type="text" name="app" id="app" class="form-control">	
+                                <span data-toggle="tooltip" data-placement="right" title="你所增加应用的目录：如Admin，如果你想增加个购物功能，在后台模板目录增加一个：Gouwu的目录"><i class="fa fa-question fa-2x"></i></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>控制器</th>
+                            <td>
+                            	<input type="text" name="model" id="model" class="form-control">	             
+                                <span data-toggle="tooltip" data-placement="right" title="application目录下的控制器，名称对应后台模板应用目录下的子目录名称如：Gouwu的目录下有一个Jifen积分功能 "><i class="fa fa-question fa-2x"></i></span>       
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>方法</th>
+                            <td>
+                            	<input type="text" name="action" id="action" class="form-control">	
+                                 <span data-toggle="tooltip" data-placement="right" title="控制器里面的其中一个方法"><i class="fa fa-question fa-2x"></i></span>                   
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>参数</th>
+                            <td>
+                            	<input type="text" name="data" class="form-control">
+						
+                                <span data-toggle="tooltip" data-placement="right" title="" data-original-title="例:id=3&amp;p=3"><i class="fa fa-question fa-2x"></i></span>                                        
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>图标</th>
+                            <td>
+                            	<input type="text" name="icon" id="action" class="form-control">
+                                <span data-toggle="tooltip" data-placement="right" title="不带前缀fa-，如fa-user => user"><i class="fa fa-question fa-2x"></i></span> 
+						        &nbsp;<a href="http://www.simplestart.cn/font/" class="btn btn-primary btn-xs" target="_blank">选择图标</a>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>备注</th>
+                            <td>
+                            	<textarea name="remark" rows="5" cols="57" style="width: 500px;" class="form-control"></textarea>                     
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>状态</th>
+                            <td>
+                             
+                                <label class="switch-btn circle-style">
+                                    <input class="checked-switch" type="checkbox" name="status" value="1" checked>
+                                    <span class="text-switch" data-yes="显" data-no="隐"></span> 
+                                    <span class="toggle-btn"></span> 
+                                </label>     
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>类型</th>
+                            <td>
+                             
+                                <select name="type" class="form-control">
+                                    <option value="1" selected>权限认证+菜单</option>
+                                    <option value="0">只作为菜单</option>
+                                </select>
+                                <span data-toggle="tooltip" data-placement="right" title="注意：“权限认证+菜单”表示加入后台权限管理，纯碎是菜单项请不要选择此项。"><i class="fa fa-question fa-2x"></i></span>
+						     
+                               
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+            
+			
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="{:U('menu/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<admintpl file="header" />
+<style>
+.checkbox {margin: 0;line-height: 0.5;}
+.checkbox input {cursor: pointer;}
+.checkbox label {padding-left: 0px;}
+.checkbox label::after {top: 6px;}
+</style>
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="javascript:;">{:L('PORTAL_ADMINPAGE_RECYCLEBIN')}</a></li>
+		</ul>
+        <div class="bs-example well" data-example-id="simple-form-inline">
+            <form class="form-inline" method="post" action="{:U('AdminPage/recyclebin')}">
+              <div class="form-group">
+                <label>时间</label>
+                <input type="text" name="start_time" class="form-control input-sm js-date" value="{$formget.start_time}" style="width: 80px;" autocomplete="off">-
+                <input type="text" class="form-control input-sm js-date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> 
+              </div>
+              <div class="form-group">
+                <label>关键词</label>
+                <input type="text" name="keyword" class="form-control input-sm" value="{$formget.keyword}"  placeholder="请输入关键字...">
+              </div>
+              <button type="submit" class="btn btn-info btn-sm">搜索</button>
+            </form>            
+          </div>
+          
+		
+		<form class="js-ajax-form" method="post">
+			<div class="table-actions">
+				<button class="btn btn-danger btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPage/clean')}" data-subcheck="true" data-msg="你确定删除吗？"><i class="fa fa-trash-o fa-fw"></i>{:L('DELETE')}</button>
+			</div>
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						<th width="16">
+                        	<div class="checkbox checkbox-info checkbox-circle"> 
+                                <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                                <label for="check_all"></label>
+                            </div>
+                        </th>
+						<th width="40">ID</th>
+						<th>标题</th>
+						<!-- <th>点击量</th> -->
+						<th width="100">发布人</th>
+						<th width="70"><span>发布时间</span></th>
+						<th width="83">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<foreach name="pages" item="vo">
+				<tr>
+					<td>
+                    	<div class="checkbox checkbox-info checkbox-circle" style="    margin: 0;"> 
+                            <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.id}">
+                            <label for="{$vo.id}"></label>
+                        </div>
+                    </td>
+					<td><a>{$vo.id}</a></td>
+					<td><span>{$vo.page_title}</span></td>
+					<!-- <td>0</td> -->
+					<td>{$users[$vo['page_author']]['user_login']}</td>
+					<td>{:date('y/m/d',strtotime($vo['page_date']))}</td>
+					<td>
+						<a href="{:U('AdminPage/restore',array('id'=>$vo['id']))}" class="btn btn-primary btn-xs js-ajax-dialog-btn" data-msg="确定还原吗？">还原</a>
+						<a href="{:U('AdminPage/clean',array('id'=>$vo['id']))}" class="btn btn-danger btn-xs js-ajax-delete" data-toggle="tooltip" data-placement="top" title="{:L('DELETE')}"><i class="fa fa-trash-o fa-fw"></i></a>
+                        
+					</td>
+				</tr>
+				</foreach>
+				
+			</table>
+			
+			<div class="pagination">{$Page}</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

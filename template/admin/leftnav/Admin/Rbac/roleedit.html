@@ -1,0 +1,69 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('rbac/index')}">{:L('ADMIN_RBAC_INDEX')}</a></li>
+			<li><a href="{:U('rbac/roleadd')}">{:L('ADMIN_RBAC_ROLEADD')}</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" action="{:U('Rbac/roleedit_post')}" method="post">
+        	<div class="row-fluid">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('ROLE_NAME')}</th>
+                        <td>
+                            <input type="text" name="name" value="{$data.name}" id="rolename" class="form-control"/>
+                            <span>*</span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('ROLE_DESCRIPTION')}</th>
+                        <td>
+                            <textarea name="remark" rows="2" cols="20" id="remark" class="form-control" style="height: 100px; width: 500px;">{$data.remark}</textarea>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('STATUS')}</th>
+                        <td> 
+                        
+                      <if condition="($data['status']==1)">                                
+                              <input type="hidden" name="status" value="0" checked> 
+                            <else />
+                            
+                           </if>
+                            
+                        <label class="switch-btn circle-style">
+                            <if condition="($data['status']==1)">                                
+                                <input class="checked-switch" type="checkbox" name="status" value="1" checked>
+                                <span class="text-switch" data-yes="开" data-no="禁"></span> 
+                                <span class="toggle-btn"></span>
+                            <else />
+                                <input class="checked-switch" type="checkbox" name="status" value="1">
+                                <span class="text-switch" data-yes="开" data-no="禁"></span> 
+                                <span class="toggle-btn"></span>
+                            </if>
+                            
+                        </label>          
+                                             
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+			<fieldset>
+				
+				
+			</fieldset>
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{$data.id}"/>
+				<button type="submit" class="btn btn-primary  js-ajax-submit">{:L('SAVE')}</button>
+				<a class="btn" href="{:U('rbac/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

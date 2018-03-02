@@ -1,0 +1,49 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('AdminModel/index')}">分类模型</a></li>
+			<li><a href="{:U('AdminModel/add')}">添加模型</a></li>
+		</ul>
+		<form method="post" class="js-ajax-form" action="{:U('AdminTerm/listorders')}">
+			
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						
+						<th width="50">ID</th>
+						<th>模型名称</th>
+                        <th width="100">状态</th>
+						
+						<th width="108">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+                     <php>$status=array("1"=>"启用","0"=>"停用");</php>
+					<foreach name="model" item="vo">
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.model_name}</td>
+                            <td>{$status[$vo['model_status']]}</td>
+                         
+                            <td>
+                                <a href="{:U('AdminModel/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-xs" style="padding: 0px 4px;line-height: 1.4;" data-toggle="tooltip" data-placement="top" title="{:L('EDIT')}"><i class="fa fa-edit fa-fw"></i></a>
+                                <a href="{:U('AdminModel/delete',array('id'=>$vo['id']))}" class="btn btn-danger btn-xs js-ajax-delete" style="padding: 0px 4px;line-height: 1.4;" data-toggle="tooltip" data-placement="top" title="{:L('DELETE')}"><i class="fa fa-trash-o fa-fw"></i></a>
+                                
+                                  
+                            </td>
+                        </tr>
+                        </foreach>
+				</tbody>
+		
+			</table>
+			
+		</form>
+        
+        
+        
+</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

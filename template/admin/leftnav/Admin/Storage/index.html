@@ -1,0 +1,88 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('storage/index')}">{:L('ADMIN_STORAGE_INDEX')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('storage/setting_post')}">
+			<php>$support_storages=array("Local"=>L('DEFAULT'),"Qiniu"=>L('QINIU'));</php>
+			
+            <div class="bs-example well" data-example-id="simple-form-inline">
+              <div class="form-inline">
+                  <div class="form-group">
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;储存方式</label>
+                    <select name="type" class="form-control input-sm">
+                        <foreach name="support_storages" item="vo"> <php>$type_selected=$type==$key?"selected":"";</php>
+                        <option value="{$key}"{$type_selected}>{$vo}</option>
+                        </foreach>
+                    </select>
+                  </div>          
+              </div>                           
+          </div>
+            
+            
+			<div style="margin-top: 10px;">
+				<!--<ul class="nav nav-tabs">
+					<li class="active"><a>{:L('QINIU')}</a></li>
+				</ul>-->
+				<div class="row-fluid">			
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="200">AccessKey</th>
+                                <td>
+                                    <input type="text" class="form-control" name="Qiniu[accessKey]" value="{$Qiniu.accessKey}"> 
+                                    
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>SecretKey</th>
+                                <td>
+                                    <input type="text" class="form-control" name="Qiniu[secrectKey]" value="{$Qiniu.secrectKey}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('DOMAIN')}</th>
+                                <td>
+                                    <input type="text" class="form-control" name="Qiniu[domain]" value="{$Qiniu.domain}">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>{:L('BUCKET')}</th>
+                                <td>
+                                    <input type="text" class="form-control" name="Qiniu[bucket]" value="{$Qiniu.bucket}">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>{:L('GET_ACCESS_KEY')}</th>
+                                <td>
+                                    <a href="https://portal.qiniu.com/signup?code=3lfihpz361o42" class="btn btn-primary btn-xs" target="_blank">{:L('GET_IT_NOW')}</a>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>{:L('QINIU_PROMOTION_CODE')}</th>
+                                <td>
+                                    <a target="_blank">507670e8</a>
+                                </td>
+                            </tr>
+                        
+                       </tbody>
+                  </table>
+                </div>
+            
+            
+				
+			</div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

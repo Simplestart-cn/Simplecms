@@ -1,0 +1,51 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+
+			<li><a href="{:U('route/index')}">URL美化</a></li>
+			<li class="active"><a href="{:U('route/add')}">添加URL规则</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('route/add_post')}">
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">原始网址:</th>
+                            <td>
+                                <input type="text" name="full_url" value="" class="form-control">
+                                <span data-toggle="tooltip" data-placement="right" title="必填字段">*</span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>显示网址:</th>
+                            <td>
+                               <input type="text" name="url" value="" class="form-control">
+                               <span data-toggle="tooltip" data-placement="right" title="必填字段">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>是否启用:</th>
+                            <td>
+                            	<label class="switch-btn circle-style">
+                                    <input class="checked-switch" type="checkbox" name="status" value="1" checked>
+                                    <span class="text-switch" data-yes="开" data-no="禁"></span> 
+                                    <span class="toggle-btn"></span> 
+                                </label>    
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+				<a class="btn" href="{:U('route/index')}">返回</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh_CN" style="overflow: hidden;">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+<meta charset="utf-8">
+<title>简易CMS {:L('ADMIN_CENTER')}</title>
+<meta name="description" content="This is page-header (.page-header &gt; h1)">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--主题-->
+  <link href="__TMPL__Public/css/color/color.css" rel="stylesheet" title="default"  type="text/css" id="cssfile" />
+<!--主题End-->
+<link href="__TMPL__Public/frame/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">   
+<link href="__TMPL__Public/css/adminlte.css" rel="stylesheet" type="text/css">   
+<link href="__TMPL__Public/frame/font-awesome/4.4.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
+
+<!--加载动画库-->
+<link href="__TMPL__Public/css/spinners.css"  rel="stylesheet" type="text/css">
+<!--加载动画库End-->
+
+<script>
+//全局变量
+var GLOBALCONF = {
+	HOST:"{$_SERVER['HTTP_HOST']}",
+    ROOT: "__ROOT__",
+    JS_ROOT: "__PUBLIC__/js/",
+    TOKEN: ""
+};
+</script>
+<php>$submenus=$SUBMENU_CONFIG;</php>
+
+<php>function getsubmenu($submenus){</php>
+<php>foreach($submenus as $menu){ </php>
+					<li>
+						<php>
+							$menu_name=L($menu['lang']);
+							$menu_name=$menu['lang']==$menu_name?$menu['name']:$menu_name;
+						</php>
+						<php>if(empty($menu['items'])){</php>
+							<a href="javascript:openapp('{$menu.url}','{$menu.id}','{$menu_name}',true);">
+								<i class="fa fa-{$menu.icon|default='desktop'}"></i>
+								<span class="menu-text">
+									{$menu_name}
+								</span>
+							</a>
+						<php>}else{</php>
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-{$menu.icon|default='desktop'} normal"></i>
+								<span class="menu-text normal">
+									{$menu_name}
+								</span>
+								<b class="arrow fa fa-angle-right normal"></b>
+								<i class="fa fa-reply back"></i>
+								<span class="menu-text back">返回</span>
+								
+							</a>
+							
+							<ul  class="submenu">
+									<php>getsubmenu1($menu['items'])</php>
+							</ul>	
+						<php>}</php>
+						
+					</li>
+					
+				<php>}</php>
+<php>}</php>
+
+<php>function getsubmenu1($submenus){</php>
+<php>foreach($submenus as $menu){</php>
+					<li>
+						<php>
+							$menu_name=L($menu['lang']);
+							$menu_name=$menu['lang']==$menu_name?$menu['name']:$menu_name;
+						</php>
+						<php>if(empty($menu['items'])){</php>
+							<a href="javascript:openapp('{$menu.url}','{$menu.id}','{$menu_name}',true);">
+								<i class="fa fa-{$menu.icon|default='desktop'} normal"></i>
+								<span class="menu-text">
+									{$menu_name}
+								</span>
+							</a>
+						<php>}else{</php>
+							<a href="#" class="dropdown-toggle">
+								<i class="fa fa-{$menu.icon|default='desktop'} normal"></i>
+								<span class="menu-text">
+									{$menu_name}
+								</span>
+								<b class="arrow fa fa-angle-right"></b>
+							</a>
+							<ul  class="submenu">
+									<php>getsubmenu2($menu['items'])</php>
+							</ul>	
+						<php>}</php>
+						
+					</li>
+					
+				<php>}</php>
+<php>}</php>
+
+<php>function getsubmenu2($submenus){</php>
+<php>foreach($submenus as $menu){</php>
+					<li>
+						<php>
+							$menu_name=L($menu['lang']);
+							$menu_name=$menu['lang']==$menu_name?$menu['name']:$menu_name;
+						</php>
+						
+						<a href="javascript:openapp('{$menu.url}','{$menu.id}','{$menu_name}',true);">
+							&nbsp;<i class="fa fa-angle-double-right"></i>
+							<span class="menu-text">
+								{$menu_name}
+							</span>
+						</a>
+					</li>
+					
+				<php>}</php>
+<php>}</php>
+
+
+<if condition="APP_DEBUG">
+<style>
+#think_page_trace_open{left: 0 !important;
+right: initial !important;}			
+</style>
+</if>
+
+
+</head>
+
+<body style="min-width:900px;" screen_capture_injected="true">
+
+    <div id="loading" class="">
+        <div class="load three-bounce selected"><div class="one"></div><div class="two"></div><div class="three"></div></div>
+    </div>
+	<div id="right_tools_wrapper">
+		<!--<span id="right_tools_clearcache" title="清除缓存" onclick="javascript:openapp('{:U('admin/setting/clearcache')}','right_tool_clearcache','清除缓存');"><i class="fa fa-trash-o right_tool_icon"></i></span>-->
+		<span id="refresh_wrapper" title="{:L('REFRESH_CURRENT_PAGE')}" ><i class="fa fa-refresh right_tool_icon"></i></span>
+	</div>
+    
+    
+    
+    
+    <header class="header">
+            <a href="{:U('index/index')}" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+               简易CMS {:L('ADMIN_CENTER')}
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                
+                <div class="pull-left nav_shortcuts" >
+					
+					<a class="" href="__ROOT__/" title="{:L('WEBSITE_HOME_PAGE')}" target="_blank">
+						<i class="fa fa-home fa-fw"></i>
+					</a>
+					                   
+					<if condition="sp_auth_check(sp_get_current_admin_id(),'portal/AdminPageapp/index')">
+					<a class="" href="javascript:openapp('{:U('portal/AdminPage/appindex')}','index_pagelist','{:L('PORTAL_ADMINPAGE_INDEX')}');" title="单页">
+						<i class="fa fa-file-o fa-fw"></i>
+					</a>
+					</if>
+					<if condition="sp_auth_check(sp_get_current_admin_id(),'portal/AdminPost/add')">
+                    <a class="" href="javascript:openapp('{:U('portal/AdminProduct/index')}','index_postadd','{:L('PORTAL_ADMINPOST_ADD')}');" title="新增">
+						<i class="fa fa-shopping-cart fa-fw"></i>
+					</a>
+                    </if>
+					<if condition="sp_auth_check(sp_get_current_admin_id(),'portal/AdminPost/index')">
+					<a class="" href="javascript:openapp('{:U('portal/AdminPost/index')}','index_postlist','{:L('PORTAL_ADMINPOST_INDEX')}');" title="文章">
+						<i class="fa fa-file-text-o fa-fw"></i>
+					</a>
+					</if>
+
+					<if condition="sp_auth_check(sp_get_current_admin_id(),'admin/setting/clearcache')">
+					<a class="" href="javascript:openapp('{:U('admin/setting/clearcache')}','index_clearcache','{:L('ADMIN_SETTING_CLEARCACHE')}');" title="缓存">
+						<i class="fa fa-trash-o fa-fw"></i>
+					</a>
+					</if>
+				</div>
+                
+                
+                
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!--语言切换-->
+                        <li><a href="?l=zh-cn" <eq name="$Thinkphp.cookie.sp_language" value="zh-cn">class="on"</eq> >简体中文{$Thinkphp.cookie.sp_language}</a></li>
+                        <li><a href="?l=en-us" <eq name="$Thinkphp.cookie.sp_language" value="en-us">class="on"</eq> >English</a></li>
+                        <!--主题-->
+                        <li id="theme-btn" class="dropdown"><a href="javascript:;"  data-toggle="dropdown" style="font-size:13px;"><i class="fa fa-magic" style=""></i></a>
+                            <div class="theme-dropdown">
+                               <div class="theme-list">
+                                <a href="javascript:;" id="color"><i class="fa fa-check"></i></a>
+                                <a href="javascript:;" id="color1"><i class="fa fa-check"></i></a>
+                                <a href="javascript:;" id="color2"><i class="fa fa-check"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="label label-danger">6</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">你有6条信息</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <style>.menu{ height:200px!important;}</style>
+                                    <ul class="menu">
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="__TMPL__Public/images/logo-admin.png" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    测试名称
+                                                    <small><i class="fa fa-clock-o"></i> 5小时前</small>
+                                                </h4>
+                                                <p>详细介绍内容</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="__TMPL__Public/images/logo-admin.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    测试名称
+                                                    <small><i class="fa fa-clock-o"></i> 5小时前</small>
+                                                </h4>
+                                                <p>详细介绍内容</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="__TMPL__Public/images/logo-admin.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    测试名称
+                                                    <small><i class="fa fa-clock-o"></i> 5小时前</small>
+                                                </h4>
+                                                <p>详细介绍内容</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="__TMPL__Public/images/logo-admin.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    测试名称
+                                                    <small><i class="fa fa-clock-o"></i> 5小时前</small>
+                                                </h4>
+                                                <p>详细介绍内容</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="__TMPL__Public/images/logo-admin.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    测试名称
+                                                    <small><i class="fa fa-clock-o"></i> 5小时前</small>
+                                                </h4>
+                                                <p>详细介绍内容</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">看到所有的消息</a></li>
+                            </ul>
+                        </li>
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!--<li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-warning"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    
+                                    <ul class="menu">
+                                        
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users warning"></i> 5 new members joined
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>-->
+                        
+                        
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>{:L('WELCOME_USER',array('username'=>empty($admin['user_nicename'])?$admin['user_login']:$admin['user_nicename']))}<i class="caret"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                     <if condition="$admin['avatar']">
+                                    <img class="img-circle" src="{:sp_get_user_avatar_url($admin['avatar'])}" alt="{$admin.user_login}">
+                                    <else />
+                                    <img class="img-circle" src="__TMPL__Public/images/logo-admin.png" alt="{$admin.user_login}">
+                                    </if>
+                                    <p>
+                                       {:L('WELCOME_USER',array('username'=>empty($admin['user_nicename'])?$admin['user_login']:$admin['user_nicename']))}
+                                        <small>简易CMS</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">                                      
+                                        <if condition="sp_auth_check(sp_get_current_admin_id(),'admin/user/userinfo')">
+                                             <a href="javascript:openapp('{:U('user/userinfo')}','index_userinfo','{:L('ADMIN_USER_USERINFO')}');" class="btn btn-default btn-flat"><i class="fa fa-cog"></i>{:L('ADMIN_USER_USERINFO')}</a>
+                                        </if>
+                                    </div>
+                                    
+                                    <div class="pull-right">
+                                        <a href="{:U('Public/logout')}" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> {:L('LOGOUT')}</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    
+    
+
+    
+
+	<div class="main-container container-fluid">
+
+		<div class="sidebar" id="sidebar">
+			<!--<div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../img/avatar3.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Hello, Jane</p>
+
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>-->
+			<div id="nav_wraper">
+            
+			<ul class="nav nav-list">
+				{:getsubmenu($submenus)}
+			</ul>
+			</div>
+			
+		</div>
+
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<a id="task-pre" class="task-changebt">←</a>
+				<div id="task-content">
+				<ul class="macro-component-tab" id="task-content-inner">
+					<li class="macro-component-tabitem noclose" app-id="0" app-url="{:U('main/index')}" app-name="首页">
+						<span class="macro-tabs-item-text">{:L('HOME')}</span>
+					</li>
+				</ul>
+				<div style="clear:both;"></div>
+				</div>
+				<a id="task-next" class="task-changebt">→</a>
+			</div>
+
+			<div class="page-content" id="content">
+				<iframe src="{:U('Main/index')}" style="width:100%;height: 100%;" frameborder="0" id="appiframe-0" class="appiframe"></iframe>
+			</div>
+		</div>
+	</div>
+    
+
+
+	<script src="__PUBLIC__/js/jquery.js"></script>
+	<script src="__TMPL__Public/frame/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script src="__TMPL__Public/frame/slimscroll/slimscroll.js"></script>
+    
+	<script>
+	var ismenumin = $("#sidebar").hasClass("menu-min");
+	$(".nav-list").on( "click",function(event) {
+		var closest_a = $(event.target).closest("a");
+		if (!closest_a || closest_a.length == 0) {
+			return
+		}
+		if (!closest_a.hasClass("dropdown-toggle")) {
+			if (ismenumin && "click" == "tap" && closest_a.get(0).parentNode.parentNode == this) {
+				var closest_a_menu_text = closest_a.find(".menu-text").get(0);
+				if (event.target != closest_a_menu_text && !$.contains(closest_a_menu_text, event.target)) {
+					return false
+				}
+			}
+			return
+		}
+		var closest_a_next = closest_a.next().get(0);
+		if (!$(closest_a_next).is(":visible")) {
+			var closest_ul = $(closest_a_next.parentNode).closest("ul");
+			if (ismenumin && closest_ul.hasClass("nav-list")) {
+				return
+			}
+			closest_ul.find("> .open > .submenu").each(function() {
+						if (this != closest_a_next && !$(this.parentNode).hasClass("active")) {
+							$(this).slideUp(150).parent().removeClass("open")
+						}
+			});
+		}
+		if (ismenumin && $(closest_a_next.parentNode.parentNode).hasClass("nav-list")) {
+			return false;
+		}
+		$(closest_a_next).slideToggle(150).parent().toggleClass("open");
+		return false;
+	});
+	</script>
+    
+	<script src="__TMPL__Public/js/index.js"></script>
+    
+<script type="text/javascript">
+//cookie记住主题
+$(function(){
+     var $li=$(".theme-list a");
+	 $li.hover(function(){
+		 $("#"+this.id).addClass("selected")
+		  .siblings().removeClass("selected");
+		 $("#cssfile").attr("href","__TMPL__Public/css/color/"+(this.id)+".css");
+		 
+		  },function(){
+			  var cookie_style=$.cookie("mystyle");
+			 $("#"+cookie_style).addClass("selected")
+		  .siblings().removeClass("selected");
+	     $("#cssfile").attr("href","__TMPL__Public/css/color/"+cookie_style+".css");
+		 $.cookie("mystyle",cookie_style,{path:'/',expires:30});//读取cookie
+		  
+		  });		  	
+		  var $li=$(".theme-list a");
+	 $li.click(function(){
+		 $("#"+this.id).addClass("selected")
+		  .siblings().removeClass("selected");
+		 $("#cssfile").attr("href","__TMPL__Public/css/color/"+(this.id)+".css");
+		 $.cookie("mystyle",this.id,{path:'/',expires:30}); //存入cookie
+		 
+		  });
+		    		
+		 var cookie_style=$.cookie("mystyle");
+	     if(cookie_style){
+		 $("#"+cookie_style).addClass("selected")
+		  .siblings().removeClass("selected");
+	     $("#cssfile").attr("href","__TMPL__Public/css/color/"+cookie_style+".css");
+		 $.cookie("mystyle",cookie_style,{path:'/',expires:30});//读取cookie		
+	  } 
+});
+</script>  
+<script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>	
+
+</body>
+</html>

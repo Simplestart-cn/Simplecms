@@ -1,0 +1,237 @@
+<admintpl file="header" />
+<style>
+.checkbox {margin: 0;line-height: 0.5;}
+.checkbox input {cursor: pointer;}
+.checkbox label {padding-left: 0px;}
+.checkbox label::after {top: 6px;}
+</style>
+</head>
+<body style=" overflow:hidden;">
+	<div class="wrap js-check-wrap">
+        <div style="float: left;width: 220px;">
+
+           <form method="post" action="{:U('AdminPost/index')}">
+               <div class="input-group input-group-sm" style="padding: 5px 0;">
+                    <input type="text" name="keyword" value="{$formget.keyword}" placeholder="请输入关键字..." class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-flat" type="submit">Go!</button>
+                    </span>
+               </div>               
+           
+           </form>
+           
+           <div class="article-nav navbar" id="nav_article" >           
+               <ul class="menu">
+               {$taxonomys_nav}
+               </ul>                        
+           </div>     
+        </div>
+<!--右侧-->
+        <div class="article-right" style="">       
+            <div class="advanced_search">
+            <a class="btn btn-info btn-sm pull-right ">高级<i class="fa fa-search fa-fw"></i></a>
+                <div class="well as_dropdown">
+                  <a href="" id="as_close" style=""><i class="fa fa-close"></i></a>
+                  <div class="bs-example" data-example-id="simple-form-inline">
+                    <form class="form-inline" method="post" action="{:U('AdminPost/index')}" style="margin-bottom: 20px;">
+                      <div class="form-group">
+                        <label>分类</label>
+                        <select class="form-control input-sm" name="term">
+                            <option value='0'>全部</option>{$taxonomys}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>时间</label>
+                        <input type="text" name="start_time" class="form-control input-sm js-date" value="{$formget.start_time|default=''}" style="width: 80px;" autocomplete="off">-
+                        <input type="text" class="form-control input-sm js-date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> 
+                      </div>
+                      <div class="form-group">
+                        <label>关键词</label>
+                        <input type="text" name="keyword" class="form-control input-sm" value="{$formget.keyword}"  placeholder="请输入关键字...">
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-sm">搜索</button>
+                    </form>
+                    
+                    <form class="form-inline" method="post" action="{:U('AdminPost/index')}">
+                      <div class="form-group">
+                        <label>分类</label>
+                        <select class="form-control input-sm" name="term">
+                            <option value='0'>全部</option>{$taxonomys}
+                        </select>
+                      </div>
+                      <button type="submit" name="status" class="btn btn-primary btn-sm">待审核</button>
+                      <button type="submit" name="recommended" class="btn btn-primary btn-sm">已推荐</button>      <button type="submit" name="istop" class="btn btn-primary btn-sm">已置顶</button>
+                    </form>
+                  </div>
+                </div>
+            </div> 
+<script>
+$(".advanced_search").click(function(){
+	$(this).addClass("open");
+	});
+</script>
+            <form class="js-ajax-form ac-custom ac-checkbox ac-checkmark" action="" method="post">
+                <div style=" overflow:hidden;">
+                    <div class="table-actions">
+                        <button class="btn btn-primary btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/listorders')}"><i class="fa fa-sort-amount-asc fa-fw"></i>{:L('SORT')}</button>
+                        <button class="btn btn-primary btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/check',array('check'=>1))}" data-subcheck="true"><i class="fa fa-check-square-o fa-fw"></i>审核</button>
+                        
+                        <button class="btn btn-primary btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/top',array('top'=>1))}" data-subcheck="true"><i class="fa fa-hand-o-up fa-fw"></i>置顶</button>
+                        
+                        <button class="btn btn-primary btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/recommend',array('recommend'=>1))}" data-subcheck="true"><i class="fa fa-thumbs-o-up fa-fw"></i>推荐</button>
+                        
+                        <button class="btn btn-primary btn-sm js-articles-move" type="button"><i class="fa fa-exchange fa-fw"></i>移动</button>
+                        
+                        <button class="btn btn-warning btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/check',array('uncheck'=>1))}" data-subcheck="true"><i class="fa fa-times fa-fw"></i>审核</button>
+                        <button class="btn btn-warning btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/top',array('untop'=>1))}" data-subcheck="true"><i class="fa fa-hand-o-down fa-fw"></i>置顶</button>
+                        <button class="btn btn-warning btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/recommend',array('unrecommend'=>1))}" data-subcheck="true"><i class="fa fa-thumbs-o-down fa-fw"></i>推荐</button>
+                        <button class="btn btn-danger btn-sm js-ajax-submit" type="submit" data-action="{:U('AdminPost/delete')}" data-subcheck="true" data-msg="你确定删除吗？"><i class="fa fa-trash-o fa-fw"></i>{:L('DELETE')}</button>
+                        
+                    </div>
+                </div>
+                <div id="article_list" class="navbar">
+                   <div class="menu">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="15">
+                                    <div class="checkbox checkbox-info checkbox-circle"> 
+                                        <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                                        <label for="check_all"></label>
+                                    </div>
+                                
+                                </th>
+                                <th width="50">{:L('SORT')}</th>
+                                <th>{:L('TITLE')}</th>
+                                <th>{:L('CATEGORY')}</th>
+                                <th width="54">{:L('HITS')}</th>
+                                <!--<th width="50">{:L('COMMENT_COUNT')}</th>
+                                <th width="50">{:L('KEYWORDS')}</th>
+                                <th width="50">{:L('SOURCE')}</th>
+                                <th width="50">{:L('ABSTRACT')}</th>-->
+                                <th width="54">{:L('THUMBNAIL')}</th>
+                                <th width="54">{:L('AUTHOR')}</th>
+                                <th width="70">{:L('PUBLISH_DATE')}</th>
+                                <th width="80">{:L('STATUS')}</th>
+                                <th width="70">{:L('ACTIONS')}</th>
+                            </tr>
+                        </thead>
+                        <php>
+                        $status=array("1"=>"yes","0"=>"no");
+                        $top_status=array("1"=>"yes","0"=>"no");
+                        $recommend_status=array("1"=>"yes","0"=>"no");
+                        </php>
+                        <foreach name="posts" item="vo">
+                        <tr>
+                            <td>
+                               <div class="checkbox checkbox-info checkbox-circle" style="    margin: 0;"> 
+                                    <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.tid}" id="{$vo.tid}" title="ID:{$vo.tid}">
+                                    <label for="{$vo.tid}"></label>
+                                </div>
+                            
+                            </td>
+                            <td><input name="listorders[{$vo.tid}]" class="input input-order" type="text" size="5" value="{$vo.listorder}" title="ID:{$vo.tid}" style="height: 20px;"></td>
+                            <td><a href="{:U('portal/article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a></td>
+                            <td>{$terms[$vo['term_id']]}</td>
+                            <td>{$vo.post_hits}</td>
+                           <!-- <td><a href="javascript:open_iframe_dialog('{:U('comment/commentadmin/index',array('post_id'=>$vo['id']))}','评论列表')">{$vo.comment_count}</a></td>
+                            <td>{$excerpt_keywords = empty($vo['post_keywords'])?"":'已填写'}</td>
+                            <td>{$excerpt_source = empty($vo['post_source'])?" ":'已填写'}</td>
+                            <td>{$excerpt_excerpt = empty($vo['post_excerpt'])?" ":'已填写'}</td>-->
+                            <td>
+                                <php>$smeta=json_decode($vo['smeta'],true);</php>
+                                <if condition="!empty($smeta['thumb'])">
+                                    <a href="{:sp_get_asset_upload_path($smeta['thumb'])}" target='_blank'>查看</a>
+                                </if>
+                            </td>
+                            <td>{$users[$vo['post_author']]['user_login']}</td>
+                            <td>{:date('y/m/d',strtotime($vo['post_date']))}</td>
+                            
+                            <td><span class="{$status[$vo['post_status']]}">审</span><span class="{$top_status[$vo['istop']]}">顶</span><span class="{$recommend_status[$vo['recommended']]}">推</span>
+                            </td>
+                            <td>
+                                <a href="{:U('AdminPost/edit',array('term'=>empty($term['term_id'])?'':$term['term_id'],'id'=>$vo['id']))}" class="btn btn-primary btn-xs" style="padding: 0px 4px;line-height: 1.4;" data-toggle="tooltip" data-placement="top" title="{:L('EDIT')}"><i class="fa fa-edit fa-fw"></i></a>
+                                <a href="{:U('AdminPost/delete',array('term'=>empty($term['term_id'])?'':$term['term_id'],'tid'=>$vo['tid']))}" class="btn btn-danger btn-xs js-ajax-delete" style="padding: 0px 4px;line-height: 1.4;" data-toggle="tooltip" data-placement="top" title="{:L('DELETE')}"><i class="fa fa-trash-o fa-fw"></i></a>
+                                
+                                  
+                            </td>
+                        </tr>
+                        </foreach>
+                        
+                    </table>
+                    <nav>
+                    <ul class="pagination pagination-sm">{$Page}</ul>
+                    </nav>
+                    </div>
+                </div>                
+            </form>        
+        
+        </div>
+	</div>
+
+<script>
+/*给文章导航list高度*/
+$(function () {	
+	$nav_article=$("#nav_article");	
+	$article_list=$("#article_list");
+	var navaheight=40;
+	var listaheight=40;
+	$nav_article.height($(window).height()-navaheight);
+	$article_list.height($(window).height()-listaheight);
+	$(window).resize(function(){
+		$nav_article.height($(window).height()-navaheight);
+		$article_list.height($(window).height()-listaheight);
+		calcTaskitemsWidth();
+	});
+});	
+</script>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script>
+		function refersh_window() {
+			var refersh_time = getCookie('refersh_time');
+			if (refersh_time == 1) {
+				window.location = "{:U('AdminPost/index',$formget)}";
+			}
+		}
+		setInterval(function() {
+			refersh_window();
+		}, 2000);
+		$(function() {
+			setCookie("refersh_time", 0);
+			Wind.use('ajaxForm', 'artDialog', 'iframeTools', function() {
+				//批量移动
+				$('.js-articles-move').click(function(e) {
+					var str = 0;
+					var id = tag = '';
+					$("input[name='ids[]']").each(function() {
+						if ($(this).attr('checked')) {
+							str = 1;
+							id += tag + $(this).val();
+							tag = ',';
+						}
+					});
+					if (str == 0) {
+						art.dialog.through({
+							id : 'error',
+							icon : 'error',
+							content : '您没有勾选信息，无法进行操作！',
+							cancelVal : '关闭',
+							cancel : true
+						});
+						return false;
+					}
+					var $this = $(this);
+					art.dialog.open("__ROOT__/index.php?g=portal&m=AdminPost&a=move&ids="+ id, {
+						title : "批量移动",
+						width : "80%"
+					});
+				});
+			});
+		});	
+	</script>
+    
+    
+
+<script src="__TMPL__Public/frame/slimscroll/slimscroll.js"></script>
+</body>
+</html>

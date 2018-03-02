@@ -1,0 +1,23 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+    
+         <div class="bs-example well" data-example-id="simple-form-inline">
+            <form class="form-inline js-ajax-form" method="post">
+              <div class="form-group">
+                <label>上一级</label>               
+                <select class="form-control input-sm" name="term_id">
+                    {$terms_tree}
+                </select>&nbsp;&nbsp;
+                
+              </div>         
+              <button class="btn btn-primary btn-sm js-ajax-submit" type="submit">移动</button>
+            </form>            
+        </div>
+        
+		
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

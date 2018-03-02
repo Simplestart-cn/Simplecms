@@ -1,0 +1,435 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#A" data-toggle="tab">{:L('WEB_SITE_INFOS')}</a></li>
+			<li><a href="#B" data-toggle="tab">{:L('WEB_BASIC_SET')}</a></li>
+            <li><a href="#C" data-toggle="tab">{:L('SEO_SETTING')}</a></li>
+			<li><a href="#D" data-toggle="tab">{:L('URL_SETTING')}</a></li>	
+            <li><a href="#E" data-toggle="tab">{:L('COMMENT_SETTING')}</a></li>
+			<li><a href="#F" data-toggle="tab">{:L("USERNAME_FILTER")}</a></li>	
+		</ul>
+		<form class="form-horizontal js-ajax-forms" action="{:U('setting/site_post')}" method="post">
+        	 <php>if($option_id):</php>
+             <input type="hidden" name="option_id" value="{$option_id}">
+             <php>endif;</php>
+			<fieldset>
+				<div class="tabbable">
+					<div class="tab-content">
+                    	<div class="row-fluid tab-pane active" id="A">			
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="200">{:L('WEBSITE_LOGO')}</th>
+                                    <td>
+                                        <input type="hidden" name="options[site_logo]" value="{$site_logo}" class="form-control" id="logo">
+                                        <empty name="site_logo">
+                                        <img src="__PUBLIC__/images/logo.png" height="50" style="float:left;margin-right:10px;" id="logo_preview">
+                                        <else/>
+                                        <img src="{$site_logo}" height="50" style="float:left;margin-right:10px;" id="logo_preview">
+                                        </empty>
+                                        <input type="button" value="上传图片" class="btn btn-default" onClick="uploadImage('logo','logo_preview')">
+                                        <input type="button" value="取消图片" class="btn btn-default" onClick="resetImage('logo','logo_preview',null)">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="200">{:L('WEBSITE_NAME')}</th>
+                                    <td>
+                                        <input type="text" name="options[site_name]" value="{$site_name}" required class="form-control"><span style="color: red;">*</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('WEBSITE_DOMAIN')}</th>
+                                    <td>
+                                        <input type="text" name="options[site_host]" value="{$site_host}" class="form-control" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('WEBSITE_ICP')}</th>
+                                    <td>
+                                        <input type="text" name="options[site_icp]" class="form-control" value="{$site_icp}">
+                                       
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('WEBMASTER_EMAIL')}</th>
+                                    <td>
+                                        <input type="text" name="options[site_admin_email]" class="form-control" value="{$site_admin_email}">
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>站长QQ</th>
+                                    <td>
+                                       <input type="text" name="options[site_admin_qq]" class="form-control" value="{$site_admin_qq}">
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>站长电话</th>
+                                    <td>
+                                       <input type="text" name="options[site_admin_phone]" class="form-control" value="{$site_admin_phone}">
+                                        
+                                    </td>
+                                </tr>  
+                                <tr>
+                                    <th>{:L("WEBSITE_STATISTICAL_CODE")}</th>
+                                    <td>
+                                       
+                                        <textarea name="options[site_tongji]" rows="5" cols="57" class="form-control">{$site_tongji}</textarea>
+                                    </td>
+                                </tr>  
+                                <tr>
+                                    <th>{:L('WEBSITE_COPYRIGHT_INFOMATION')}</th>
+                                    <td>
+                                       <textarea name="options[site_copyright]" rows="5" cols="57" class="form-control">{$site_copyright}</textarea>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>后台地址加密码</th>
+                                    <td>
+                                       <input type="text" name="options[site_admin_url_password]" value="{$site_admin_url_password}" class="form-control" id="js-site-admin-url-password">
+										<span style="color: red; font-size: 12px;">设置加密码后必须通过以下地址访问后台,请劳记此地址，为了安全，您也可以定期更换此加密码!</span>
+										<php>$site_admin_url_password =C("SP_SITE_ADMIN_URL_PASSWORD");</php>
+										<if condition="!empty($site_admin_url_password)">
+										<span class="help-block">后台地址：<span id="js-site-admin-url">{:sp_get_host()}__ROOT__?g=admin&upw={:C('SP_SITE_ADMIN_URL_PASSWORD')}</span></span>
+										</if>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                       
+                                        
+                                    </td>
+                                </tr> 
+                                                       
+                            </table>
+                        </div>
+                        
+                        <div class="row-fluid tab-pane" id="B">			
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="200">{:L('WEBSITE_THEME')}</th>
+                                    <td>
+                                        <select name="options[site_tpl]" class="form-control">
+											<foreach name="templates" item="vo">
+											<php>$tpl_selected=$site_tpl==$vo?"selected":"";</php>
+											<option value="{$vo}" {$tpl_selected}>{$vo}</option>
+											</foreach>
+										</select>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>{:L('WEBSITE_ADMIN_THEME')}</th>
+                                    <td>
+                                       <select name="options[site_adminstyle]" class="form-control">
+											<foreach name="adminstyles" item="vo">
+											<php>$adminstyle_selected=$site_adminstyle==$vo?"selected":"";</php>
+											<option value="{$vo}" {$adminstyle_selected}>{$vo}</option>
+											</foreach>
+										</select>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>{:L('ENABLE_MOBILE_THEME')}</th>
+                                    <td>
+                                       <php>$mobile_tpl_enabled_checked=empty($mobile_tpl_enabled)?'':'checked';</php>
+										<label class="switch-btn circle-style">
+                                            <input class="checked-switch" type="checkbox" name="options[mobile_tpl_enabled]" value="1" {$mobile_tpl_enabled_checked}/>
+                                            <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                            <span class="toggle-btn"></span> 
+                                        </label>
+                                        
+                                    </td>
+                                </tr> 
+                              
+                                <tr>
+                                    <th>{:L('HTML_CACHE')}</th>
+                                    <td>
+                                       <php>$html_cache_on_checked=empty($html_cache_on)?'':'checked';</php>
+									
+                                        <label class="switch-btn circle-style">
+                                            <input class="checked-switch" type="checkbox" name="options[html_cache_on]" value="1" {$html_cache_on_checked}/>
+                                            <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                            <span class="toggle-btn"></span> 
+                                        </label>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>{:L('ENABLE_UCENTER')}</th>
+                                    <td>
+                                       <php>$ucenter_enabled_checked=empty($ucenter_enabled)?"":"checked";</php>
+									
+                                        <label class="switch-btn circle-style">
+                                            <input class="checked-switch" type="checkbox" name="options[ucenter_enabled]" value="1" {$ucenter_enabled_checked}/>
+                                            <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                            <span class="toggle-btn"></span> 
+                                        </label>
+                                        
+                                    </td>
+                                </tr> 
+                                
+                                                       
+                            </table>
+                        </div>
+						<div class="row-fluid tab-pane" id="C">			
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="200">{:L('WEBSITE_SEO_TITLE')}</th>
+                                    <td>
+                                        <input type="text" name="options[site_seo_title]" value="{$site_seo_title}" class="form-control">
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>{:L('WEBSITE_SEO_KEYWORDS')}</th>
+                                    <td>
+                                       <input type="text" name="options[site_seo_keywords]" value="{$site_seo_keywords}" style="width:96%;" class="form-control"/>
+                                        
+                                    </td>
+                                </tr> 
+                                 <tr>
+                                    <th>{:L('WEBSITE_SEO_DESCRIPTION')}</th>
+                                    <td>
+                                       <textarea name="options[site_seo_description]" rows="5" cols="57" style="width: 384px;" class="form-control">{$site_seo_description}</textarea>
+                                        
+                                    </td>
+                                </tr> 
+                                
+                                                       
+                            </table>
+                        </div>
+                        <div class="row-fluid tab-pane" id="D">			
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="200">{:L('URL_MODE')}</th>
+                                    <td>
+                                        <php>$urlmodes=array( "0"=>L('URL_NORMAL_MODE'), "1"=>L('URL_PATHINFO_MODE'), "2"=>L('URL_REWRITE_MODE'));</php>
+										<select name="options[urlmode]" class="form-control">
+											<foreach name="urlmodes" item="vo">
+											<php>$urlmode_selected=$key==$urlmode?"selected":"";</php>
+											<option value="{$key}" {$urlmode_selected}>{$vo}</option>
+											</foreach>
+										</select>
+										
+                                        <span style="color: red;">*</span>
+                                        <span data-toggle="tooltip" data-placement="right" title="{:L('URL_MODE_HELP_TEXT')}"><i class="fa fa-question fa-2x"></i></span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>{:L('URL_REWRITE_SUFFIX')}</th>
+                                    <td>
+                                       <input type="text" name="options[html_suffix]" value="{$html_suffix}" class="form-control">
+									
+                                        <span data-toggle="tooltip" data-placement="right" title="{:L('URL_REWRITE_SUFFIX_HELP_TEXT')}"><i class="fa fa-question fa-2x"></i></span>
+                                        
+                                    </td>
+                                </tr>                                                        
+                            </table>
+                        </div>
+                        
+                        
+                        <div class="row-fluid tab-pane" id="E">			
+                            <table class="table table-bordered">
+                                
+                                
+                                <tr>
+                                    <th width="200">{:L('COMMENT_CHECK')}</th>
+                                    <td>
+                                       <php>$comment_need_checked=empty($comment_need_check)?"":"checked";</php>
+									
+                                        <label class="switch-btn circle-style">
+                                            <input class="checked-switch" type="checkbox" name="options[comment_need_check]" value="1" {$comment_need_checked}/>
+                                            <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                            <span class="toggle-btn"></span> 
+                                        </label>
+                                        
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>{:L('COMMENT_TIME_INTERVAL')}</th>
+                                    <td>
+                                       <input type="text" name="options[comment_time_interval]" value="{$comment_time_interval|default=60}" style="width:60px;" class="form-control">{:L('SECONDS')}
+									
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                                       
+                            </table>
+                        </div>
+                        
+                        <div class="row-fluid tab-pane" id="F">			
+                            <table class="table table-bordered">
+                                
+                                <tr>
+                                    <th width="200">{:L('SPECAIL_USERNAME')}</th>
+                                    <td>
+                                       <textarea name="user_options[banned_usernames]" rows="5" cols="57" style="width:96%;" class="form-control">{$user_options.banned_usernames}</textarea>
+                                      
+									
+                                      
+                                    </td>
+                                </tr>
+                                                       
+                            </table>
+                        </div>
+                        
+                        
+                        
+                        
+					
+					</div>
+				</div>
+
+				<div class="form-actions" style="padding:20px;">
+					<button type="submit" class="btn btn-primary btn-block js-ajax-submit">{:L("SAVE")}</button>
+				</div>
+			</fieldset>
+		</form>
+
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+	<script>
+		/////---------------------
+		$(function(){
+			$("#urlmode-select").change(function(){
+				if($(this).val()==1){
+					alert("更改后，若发现前台链接不能正常访问，可能是您的服务器不支持PATHINFO，请先修改data/conf/config.php文件的URL_MODEL为0保证网站正常运行,在配置服务器PATHINFO功能后再更新为PATHINFO模式！");
+				}
+				
+				if($(this).val()==2){
+					alert("更改后，若发现前台链接不能正常访问，可能是您的服务器不支持REWRITE，请先修改data/conf/config.php文件的URL_MODEL为0保证网站正常运行，在开启服务器REWRITE功能后再更新为REWRITE模式！");
+				}
+			});
+			$("#js-site-admin-url-password").change(function(){
+				$(this).data("changed",true);
+			});
+		});
+		Wind.use('validate', 'ajaxForm', 'artDialog', function() {
+			//javascript
+			var form = $('form.js-ajax-forms');
+			//ie处理placeholder提交问题
+			if ($.browser.msie) {
+				form.find('[placeholder]').each(function() {
+					var input = $(this);
+					if (input.val() == input.attr('placeholder')) {
+						input.val('');
+					}
+				});
+			}
+			//表单验证开始
+			form.validate({
+				//是否在获取焦点时验证
+				onfocusout : false,
+				//是否在敲击键盘时验证
+				onkeyup : false,
+				//当鼠标掉级时验证
+				onclick : false,
+				//验证错误
+				showErrors : function(errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try {
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id : 'error',
+							icon : 'error',
+							lock : true,
+							fixed : true,
+							background : "#CCCCCC",
+							opacity : 0,
+							content : errorArr[0].message,
+							cancelVal : "{:L('OK')}",
+							cancel : function() {
+								$(errorArr[0].element).focus();
+							}
+						});
+					} catch (err) {
+					}
+				},
+				//验证规则
+				rules : {
+					'options[site_name]' : {
+						required : 1
+					},
+					'options[site_host]' : {
+						required : 1
+					},
+					'options[site_root]' : {
+						required : 1
+					}
+				},
+				//验证未通过提示消息
+				messages : {
+					'options[site_name]' : {
+						required : "{:L('WEBSITE_SITE_NAME_REQUIRED_MESSAGE')}"
+					},
+					'options[site_host]' : {
+						required : "{:L('WEBSITE_SITE_HOST_REQUIRED_MESSAGE')}"
+					}
+				},
+				//给未通过验证的元素加效果,闪烁等
+				highlight : false,
+				//是否在获取焦点时验证
+				onfocusout : false,
+				//验证通过，提交表单
+				submitHandler : function(forms) {
+					$(forms).ajaxSubmit({
+						url : form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+						dataType : 'json',
+						beforeSubmit : function(arr, $form, options) {
+
+						},
+						success : function(data, statusText, xhr, $form) {
+							if (data.status) {
+								setCookie("refersh_time", 1);
+								var admin_url_changed=$("#js-site-admin-url-password").data("changed");
+								var message =admin_url_changed?data.info+'<br><span style="color:red;">后台地址已更新(请劳记！)</span>':data.info;
+								
+								//添加成功
+								Wind.use("artDialog", function() {
+									art.dialog({
+										id : "succeed",
+										icon : "succeed",
+										fixed : true,
+										lock : true,
+										background : "#CCCCCC",
+										opacity : 0,
+										content : message,
+										button : [ {
+											name : "{:L('OK')}",
+											callback : function() {
+												reloadPage(window);
+												return true;
+											},
+											focus : true
+										}, {
+											name : "{:L('CLOSE')}",
+											callback : function() {
+												reloadPage(window);
+												return true;
+											}
+										} ]
+									});
+								});
+							} else {
+								alert(data.info);
+							}
+						}
+					});
+				}
+			});
+		});
+		////-------------------------
+	</script>
+</body>
+</html>

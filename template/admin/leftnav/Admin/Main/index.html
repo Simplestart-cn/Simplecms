@@ -1,0 +1,394 @@
+<admintpl file="header" />
+<style>
+.row {
+    margin-right: -3px;
+    margin-left: -3px;
+}
+
+.col-sm-6{
+	padding-right: 3px;
+    padding-left: 3px;
+	}
+h4 {
+    font-size: 16px;
+}
+.main {
+    
+    padding:5px 3px;
+}
+.text-center{padding: 0 5px; overflow:hidden; background-color: #eee;}
+.panel{border: 1px solid #ccc;border-radius: 0px;} 
+</style>
+
+</head>
+<body style="">
+	<div class="main">
+    
+    
+    
+    <style>
+/*********************************/
+/************* CARDS *************/
+/*********************************/
+.card-container {
+  position: relative;
+  min-height: 80px;
+  margin-bottom: 10px; }
+  .card-container .card {
+    height: 100%;
+    position: relative;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective: 600px;
+    width: 100%;
+    cursor: pointer; }
+    .card-container .card .front {
+      height: 100%;
+      position: relative;
+      width: 100%;
+      background-color: #f2f2f2;
+      padding: 15px;
+      top: 0;
+      left: 0;
+      z-index: 900;
+      -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05);
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05);
+      -webkit-transform: rotateX(0deg) rotateY(0deg);
+      -moz-transform: rotateX(0deg) rotateY(0deg);
+      -ms-transform: rotateX(0deg) rotateY(0deg);
+      -o-transform: rotateX(0deg) rotateY(0deg);
+      transform: rotateX(0deg) rotateY(0deg);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      -o-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      /* -- transition is the magic sauce for animation -- */
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out; }
+      .card-container .card .front .media {
+        margin-bottom: 4px; }
+        .card-container .card .front .media .media-object {
+          font-size: 36px;
+          margin-top: 5px; }
+        .card-container .card .front .media .media-body small {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.5);
+          text-transform: uppercase;
+          font-weight: 300; }
+        .card-container .card .front .media .media-body h2 {
+          font-family: "Roboto", "Arial", sans-serif;
+          font-weight: 400; }
+      .card-container .card .front .progress-list .details .title {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: normal;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5); }
+      .card-container .card .front .progress-list .status {
+        font-size: 9px;
+        padding: 3px 6px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        border-radius: 2px; }
+      .card-container .card .front .progress-list .clearfix {
+        height: 20px; }
+     
+    .card-container .card.flip .front {
+      z-index: 900;
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+      transform: rotateY(180deg); 
+    }
+    .card-container .card.card-red .front {
+      color: white;
+      background-color: #ff4a43; }
+    
+    .card-container .card.card-cyan .front {
+      color: white;
+      background-color: #22beef; }
+    
+    .card-container .card.card-green .front {
+      color: white;
+      background-color: #a2d200; }
+   
+    .card-container .card.card-orange .front {
+      color: white;
+      background-color: #ffc100; }
+   
+    .card-container .card.card-amethyst .front {
+      color: white;
+      background-color: #cd97eb; }
+  
+    .card-container .card.card-greensea .front {
+      color: white;
+      background-color: #16a085; }
+   
+    .card-container .card.card-drank .front {
+      color: white;
+      background-color: #a40778; }
+   
+    .card-container .card.card-dutch .front {
+      color: white;
+      background-color: #1693a5; }
+   
+    .card-container .card.card-hotpink .front {
+      color: white;
+      background-color: #ff0066; }
+   
+    .card-container .card.card-redbrown .front {
+      color: white;
+      background-color: #d9544f; }
+   
+    .card-container .card.card-slategray .front {
+      color: white;
+      background-color: #3f4e62; }
+    
+    .card-container .card.card-blue .front {
+      color: white;
+      background-color: #418bca; }
+   
+.media-body h3{font-size: 20px;}
+</style>        
+        
+<div class="row cards">
+  <if condition="sp_auth_check(sp_get_current_admin_id(),'portal/AdminPost/index')"><a class="" href="{:U('portal/AdminPost/index')}" title="文章">
+  <div class="card-container col-lg-3 col-sm-3 col-sm-6">
+    <div class="card card-redbrown hover">
+      <div class="front">
+        <div class="media">
+          <span class="pull-left"><i class="fa fa-file-text-o media-object"></i></span>
+          <div class="media-body">
+            <small>文章总数</small>
+            <h3 class="media-heading animate-number" data-value="{$posts_count}" data-animation-duration="1500">0</h3>
+          </div>
+        </div>
+        <div class="progress-list">
+          <div class="details">
+            <div class="title pull-left">
+              今日新增<span class="animate-number" data-value="{$tonews_count}" data-animation-duration="1500">0</span>
+            </div>
+            <div class="status pull-right bg-transparent-black-1">
+              比昨天提升<span class="animate-number" data-value="{$difday|round=###,0}" data-animation-duration="1500">0</span>%
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </a></if><if condition="sp_auth_check(sp_get_current_admin_id(),'User/Indexadmin/index')"><a class="" href="{:U('User/Indexadmin/index')}" title="单页">
+  <div class="card-container col-lg-3 col-sm-3 col-sm-6">
+    <div class="card card-greensea hover">
+      <div class="front">
+        <div class="media">
+          <span class="pull-left"><i class="fa fa-group media-object"></i></span>
+          <div class="media-body">
+            <small>用户总数</small>
+            <h3 class="media-heading animate-number" data-value="{$users_count}" data-animation-duration="1500">0</h3>
+          </div>
+        </div>
+        <div class="progress-list">
+          <div class="details">
+            <div class="title pull-left">
+              今日新增<span class="animate-number" data-value="{$touser_count}" data-animation-duration="1500">0</span>
+            </div>
+            <div class="status pull-right bg-transparent-black-1">
+              比昨天提升<span class="animate-number" data-value="{$difday_u|round=###,0}" data-animation-duration="1500">0</span>%
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </a></if><if condition="sp_auth_check(sp_get_current_admin_id(),'api/guestbookadmin/index')"><a class="" href="{:U('api/guestbookadmin/index')}" title="留言">
+  <div class="card-container col-lg-3 col-sm-3 col-sm-6">
+    <div class="card card-blue hover">
+      <div class="front">
+        <div class="media">
+          <span class="pull-left"><i class="fa fa-commenting-o media-object"></i></span>
+          <div class="media-body">
+            <small>留言总数</small>
+            <h3 class="media-heading animate-number" data-value="{$sugs_count}" data-animation-duration="1500">0</h3>
+          </div>
+        </div>
+        <div class="progress-list">
+          <div class="details">
+            <div class="title pull-left">
+              今日新增<span class="animate-number" data-value="{$tosugs_count}" data-animation-duration="1500">0</span>
+            </div>
+            <div class="status pull-right bg-transparent-black-1">
+              比昨天提升<span class="animate-number" data-value="100" data-animation-duration="1500">{$difday_s|round=###,0}</span>%
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </a></if>
+  <div class="card-container col-lg-3 col-sm-3 col-sm-6">
+    <div class="card card-slategray hover">
+      <div class="front">
+        <div class="media">
+          <span class="pull-left"><i class="fa fa-comments-o media-object"></i></span>
+          <div class="media-body">
+            <small>评论总数</small>
+            <h3 class="media-heading animate-number" data-value="{$comment_count}" data-animation-duration="1500">0</h3>
+          </div>
+        </div>
+        <div class="progress-list">
+          <div class="details">
+            <div class="title pull-left">
+              今日新增<span class="animate-number" data-value="{$tocomment_count}" data-animation-duration="1500">0</span>
+            </div>
+            <div class="status pull-right bg-transparent-black-1">
+              比昨天提升<span class="animate-number" data-value="{$difday_c|round=###,0}" data-animation-duration="1500">0</span>%
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel">
+      <div class="text-center">
+        <div class="pull-left text-left">
+          <div class="">
+            <h4 class="">{:L('SYSTEM_INFORMATIONS')}</h4>
+          </div>
+        </div>
+        <div class="pull-right text-right">
+          <i class="fa fa-info fa-2x" style="margin-top:5px;color:#bbb"></i>
+        </div>
+      </div>
+      <div class="list-group">
+        <table class="table table-striped table-condensed" style="margin:0">
+        <tbody>
+        <volist name="server_info" id="vo">
+        <tr>
+          <th width="100px;">
+            {$key}
+          </th>
+          <td>
+            {$vo}
+          </td>
+        </tr>
+        </volist>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel table-bordered" style="height:287px">
+      <div class="text-center">
+        <div class="pull-left text-left">
+          <div class="">
+            <h4 class="">{:L('SYSTEM_NOTIFICATIONS')}</h4>
+          </div>
+        </div>
+        <div class="pull-right text-right">
+          <i class="fa fa-bullhorn fa-2x" style="margin-top:5px;color:#bbb"></i>
+        </div>
+      </div>
+      <div class="list-group" id="simple_notices">
+        <div href="#" class="list-group-item">
+          <div class="row">
+<!--             <div class="pull-left">
+              <img src="__TMPL__Public/images/loading.gif" style="vertical-align:middle">
+              <span style="display:inline-block;vertical-align:middle">加载中...</span>
+            </div>
+            <div class="pull-right text-right">
+              <span class="label">加载</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="plate-a">
+      <h4 class="well"></h4>
+      <div class="plate-content">
+        <div class="home_info">
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+       	
+<script src="__PUBLIC__/js/common.js"></script>
+<script>
+$(function() {
+    $(".animate-number").each(function() {
+        var d = $(this).data("value");
+        var e = $(this).data("animation-duration");
+        $(this).animateNumbers(d, true, e, "linear")
+    });
+    $(".animate-progress-bar").each(function() {
+        var d = $(this).data("percentage");
+        $(this).css("width", d)
+    });
+       
+});
+/***********
+	Animates element's number to new number with commas
+	Parameters:
+		stop (number): number to stop on
+        commas (boolean): turn commas on/off (default is true)
+		duration (number): how long in ms (default is 1000)
+		ease (string): type of easing (default is "swing", others are avaiable from jQuery's easing plugin
+	Examples:
+        $("#div").animateNumbers(1234, false, 500, "linear"); // half second linear without commas
+		$("#div").animateNumbers(1234, true, 2000); // two second swing with commas
+		$("#div").animateNumbers(4321); // one second swing with commas
+	This fully expects an element containing an integer
+	If the number is within copy then separate it with a span and target the span
+	Inserts and accounts for commas during animation by default
+***********/
+
+(function($) {
+    $.fn.animateNumbers = function(stop, commas, duration, ease) {
+        return this.each(function() {
+            var $this = $(this);
+            var start = parseInt($this.text().replace(/,/g, ""));
+			commas = (commas === undefined) ? true : commas;
+            $({value: start}).animate({value: stop}, {
+            	duration: duration == undefined ? 1000 : duration,
+            	easing: ease == undefined ? "swing" : ease,
+            	step: function() {
+            		$this.text(Math.floor(this.value));
+					if (commas) { $this.text($this.text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); }
+            	},
+            	complete: function() {
+            	   if (parseInt($this.text()) !== stop) {
+            	       $this.text(stop);
+					   if (commas) { $this.text($this.text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); }
+            	   }
+            	}
+            });
+        });
+    };
+})(jQuery);
+
+ </script>  
+</body>
+</html>

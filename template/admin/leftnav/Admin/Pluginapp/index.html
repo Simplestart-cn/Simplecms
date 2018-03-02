@@ -1,0 +1,94 @@
+<admintpl file="header" />
+<style>
+.pluginapp-list{    
+    list-style-type: none;
+    margin: 10px 10px;
+    padding: 0;
+	
+	}	
+.pluginapp-list li{    
+    width: 100px;
+    height: 100px;
+    background-color: #2F5677;
+	float: left;
+	text-align: center;
+    border-radius: 10px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+	}
+.pluginapp-list li:hover{    
+
+    background-color: #2F7CBD;
+	
+	}
+.pluginapp-list li a:hover{  
+    text-decoration: none;
+    }
+.pluginapp-list li a{  
+    display: block;
+    padding: 19px 0;
+    }	
+    
+.pluginapp-list li i{
+	color: #fff;
+    font-size: 42px;
+    display: block;
+    height: 42px;
+	}
+.pluginapp-list li span{
+	color: #fff;
+	}		  
+</style>  
+        
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('plugin/index')}">{:L('APP_LICATION_FUNCTION')}</a></li>
+			
+			
+		</ul>
+		<form method="post" class="js-ajax-form">
+			<php>
+			$status=array("1"=>L('ENABLED'),"0"=>L('DISABLED'),"3"=>L('UNINSTALLED'));
+			</php>
+			
+    
+            
+            <ul class="pluginapp-list">
+                <foreach name="plugins" item="vo">
+                    <if condition="$vo['status']==3">
+                                        
+                       <else/>
+                            <php>$config=json_decode($vo['config'],true);</php>
+                       		<if condition="!empty($vo['has_admin'])">
+									<if condition="$vo['status']==0">
+                                            <li>
+                                                <a class="" href="javascript:;">
+                                                <i class="fa fa-cogs"></i> 
+                                                <span>功能被禁用</span>    
+                                                </a>
+                                            </li>
+                                        <else/>
+                                            <li>
+                                                <a href="javascript:parent.openapp('{:sp_plugin_url($vo['name'].'://AdminIndex/index')}','plugin_{$vo.name}','{$vo.title}')" title="{$vo.description}">
+                                                <i class="fa fa-{$vo.ico}"></i> 
+                                                <span>{$vo.title}</span>    
+                                                </a>
+                                            </li>
+                                    </if>
+								<else/>
+									
+							</if>
+                       	
+                        
+                    </if>
+                </foreach>
+            </ul>
+            
+			
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

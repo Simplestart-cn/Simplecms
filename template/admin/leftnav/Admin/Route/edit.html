@@ -1,0 +1,56 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+
+			<li><a href="{:U('route/index')}">URL美化</a></li>
+			<li><a href="{:U('route/add')}">添加URL规则</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('route/edit_post')}">
+        
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">原始网址:</th>
+                            <td>
+                                <input type="text" name="full_url" value="{$full_url}" class="form-control">
+                                <span data-toggle="tooltip" data-placement="right" title="必填字段">*</span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>显示网址:</th>
+                            <td>
+                               <input type="text" name="url" value="{$url}" class="form-control">
+                               <span data-toggle="tooltip" data-placement="right" title="必填字段">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>是否启用:</th>
+                            <td>
+                            	
+                            	<select name="status" class="form-control">
+                                    <option value="1">启用</option>
+                                    <php>$status_selected=$status?"":"selected";</php>
+                                    <option value="0" {$status_selected}>禁用</option>
+                                </select>  
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+            
+			
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{$id}">
+				<button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
+				<a class="btn" href="{:U('route/index')}">返回</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

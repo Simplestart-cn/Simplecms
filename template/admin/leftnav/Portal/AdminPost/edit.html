@@ -1,0 +1,366 @@
+<admintpl file="header" />
+</head>
+<body>
+  <div class="wrap js-check-wrap">
+    <form action="{:U('AdminPost/edit_post')}" method="post" class="form-horizontal js-ajax-forms"
+    enctype="multipart/form-data">
+      <div class="row-fluid">
+        <div class="col-sm-9" style="padding: 4px;">
+          <table class="table table-bordered" style="margin-bottom: 0;">
+            <tr>
+              <th width="80">栏&nbsp;&nbsp;目</th>
+              <td>
+                <select name="term[]" class="form-control" style="width:240px;" required
+                nullmsg="分类不能为空">{$taxonomys}</select>
+                <a href="javascript:history.go(-1)" class="btn btn-primary dropdown-toggle btn-xs pull-right"
+                data-toggle="tooltip" data-placement="bottom" title="返回列表" style="padding: 3px;">
+                  &nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-reply"></i>
+                  &nbsp;&nbsp;&nbsp;
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <th>标&nbsp;&nbsp;题</th>
+              <td>
+                <input type="hidden" name="post[id]" class="form-control" value="{$post.id}">
+                <input type="text" style="width: 400px;" name="post[post_title]" required
+                class="form-control" value="{$post.post_title}" placeholder="请输入标题" />
+                <span data-toggle="tooltip" data-placement="right" title="必须填写的字段" style="">
+                  *
+                </span>
+              </td>
+            </tr>
+          </table>
+          <table class="table table-bordered" style="margin: 2px 0;">
+            <tbody>
+              <foreach name="model_config['config']" item="vo">
+                <tr>
+                  <th width="80">{$vo.name}</th>
+                  <td>
+                    <switch name="vo.type">
+                      <case value="textarea">
+                        <textarea name="{$vo.field}" class="form-control" style="width:400px;">{$vo.value}</textarea>
+                      </case>
+                      <case value="file">
+                        <input type="text" name="{$vo.field}" value="{$vo.value}" class="form-control"
+                        style="width: 400px" id="upload_{$vo.field}">
+                        <input type="button" value="上传" class="form-control" onClick="uploadFile('upload_{$vo.field}')">
+                      </case>
+                      <default/>
+                      <input type="text" style="width: 400px" name="{$vo.field}" value="{$vo.value}"
+                      class="form-control" placeholder="请输入">
+                    </switch>
+                  </td>
+                </tr>
+              </foreach>
+            </tbody>
+          </table>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th width="80">关键词</th>
+                <td>
+                  <input type="text" name="post[post_keywords]" style="width: 400px" class="form-control"
+                  value="{$post['post_keywords']}" placeholder="请输入关键字">
+                </td>
+              </tr>
+              <tr>
+                <th>来&nbsp;&nbsp;源</th>
+                <td>
+                  <input type="text" name="post[post_source]" value="{$post['post_source']}"
+                  style="width: 400px" class="form-control" placeholder="请输入来源地址">
+                </td>
+              </tr>
+              <tr>
+                <th>摘&nbsp;&nbsp;要</th>
+                <td>
+                  <textarea name="post[post_excerpt]" required style="width: 100%; height: 100px;"
+                  class="form-control" placeholder="请填写摘要">{$post.post_excerpt}</textarea>
+                </td>
+              </tr>
+              <tr>
+                <th>内&nbsp;&nbsp;容</th>
+                <td>
+                  <script type="text/plain" id="content" name="post[post_content]">{$post.post_content}</script>
+                </td>
+              </tr>
+              <tr>
+                <th>相册图集</th>
+                <td>
+                  <?php $photos=sp_get_assets($post[ 'post_photos']);?>
+                    <div class="uploader" data-filenumlimit="10" data-files='{:json_encode($photos)}'>
+                      <div class="queueList">
+                        <div class="placeholder">
+                          <div class="pickerArea"></div>
+                          <p>或将照片拖到这里，单次最多可选10张</p>
+                        </div>
+                      </div>
+                      <div class="statusBar" style="display:none;">
+                        <div class="progress">
+                          <span class="text">0%</span>
+                          <span class="percentage"></span>
+                        </div>
+                        <div class="info"></div>
+                        <div class="btns">
+                          <div class="pickerBtn"></div>
+                          <div class="uploadBtn">开始上传</div>
+                        </div>
+                      </div>
+                      <input type="hidden" name="post[post_photos]" class="field" value="{$post['post_photos']}">
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-3" style="padding: 4px;">
+          <table class="table table-bordered">
+            <tr>
+              <th>缩略图</th>
+            </tr>
+            <tr>
+              <td>
+                <?php $thumb=sp_get_assets($post[ 'post_thumb']);?>
+                  <div class="uploader" data-filenumlimit="1" data-files='{:json_encode($thumb)}'>
+                    <div class="queueList">
+                      <div class="placeholder">
+                        <div class="pickerArea"></div>
+                        <p>或将照片拖到这里，单次最多可选1张</p>
+                      </div>
+                    </div>
+                    <div class="statusBar" style="display:none;">
+                      <div class="progress">
+                        <span class="text">0%</span>
+                        <span class="percentage"></span>
+                      </div>
+                      <div class="info"></div>
+                      <div class="btns">
+                        <div class="pickerBtn"></div>
+                        <div class="uploadBtn">开始上传</div>
+                      </div>
+                    </div>
+                    <input type="hidden" name="post[post_thumb]" class="field" value="{$post['post_thumb']}">
+                  </div>
+              </td>
+            </tr>
+            <tr>
+              <th>发布时间</th>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" name="post[post_modified]" value="{$post.post_modified}"
+                class="form-control js-datetime" style="width: 160px;">
+              </td>
+            </tr>
+            <tr>
+              <th>评论</th>
+            </tr>
+            <tr>
+              <td>
+                <label style="width: 88px">
+                  <a href="javascript:open_iframe_dialog('{:U('comment/commentadmin/index',array('post_id'=>$post['id']))}','评论列表')">
+                    查看评论
+                  </a>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th>状态</th>
+            </tr>
+            <tr>
+              <td>
+                <php>
+                  $status_yes=$post['post_status']==1?"checked":"";
+                  $status_no=$post['post_status']==0?"checked":"";
+                  $istop_yes=$post['istop']==1?"checked":"";
+                  $istop_no=$post['istop']==0?"checked":"";
+                  $recommended_yes=$post['recommended']==1?"checked":"";
+                  $recommended_no=$post['recommended']==0?"checked":"";
+                </php>
+                <div class="radio">
+                  <input type="radio" name="post[post_status]" id="post_status1" value="1" {$status_yes}>
+                  <label for="post_status1">审核</label>
+                </div>
+                <div class="radio">
+                  <input type="radio" name="post[post_status]" id="post_status0" value="0" {$status_no}>
+                  <label for="post_status0">待审核</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="radio">
+                  <input type="radio" name="post[istop]" id="istop1" value="1" {$istop_yes}>
+                  <label for="istop1">置顶</label>
+                </div>
+                <div class="radio">
+                  <input type="radio" name="post[istop]" id="istop0" value="0" {$istop_no}>
+                  <label for="istop0">待置顶</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="radio">
+                  <input type="radio" name="post[recommended]" id="recommended1" value="1" {$recommended_yes}>
+                  <label for="recommended1">推荐</label>
+                </div>
+                <div class="radio">
+                  <input type="radio" name="post[recommended]" id="recommended0" value="0" {$recommended_no}>
+                  <label for="recommended0">待推荐</label>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
+        <a class="btn" href="{:U('AdminPost/index')}">返回</a>
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript" src="__PUBLIC__/js/common.js">
+  </script>
+  <!--引入uploader JS-->
+  <script type="text/javascript" src="__PUBLIC__/js/webuploader/webuploader.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/webuploader/uploadhandle.js"></script>
+  <script type="text/javascript">
+    var editorURL = GLOBALCONF.ROOT;
+  </script>
+  <script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $(".js-ajax-close-btn").on('click',
+      function(e) {
+        e.preventDefault();
+        Wind.use("artDialog",
+        function() {
+          art.dialog({
+            id: "question",
+            icon: "question",
+            fixed: true,
+            lock: true,
+            background: "#CCCCCC",
+            opacity: 0,
+            content: "您确定需要关闭当前页面嘛？",
+            ok: function() {
+              setCookie("refersh_time", 1);
+              window.close();
+              return true
+            }
+          })
+        })
+      });
+      Wind.use('validate', 'ajaxForm', 'artDialog',
+      function() {
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+          editorcontent.sync()
+        } catch(err) {}
+        jQuery.validator.addMethod('editorcontent',
+        function() {
+          try {
+            editorcontent.sync()
+          } catch(err) {};
+          return editorcontent.hasContents()
+        });
+        var form = $('form.js-ajax-forms');
+        if ($.browser.msie) {
+          form.find('[placeholder]').each(function() {
+            var input = $(this);
+            if (input.val() == input.attr('placeholder')) {
+              input.val('')
+            }
+          })
+        }
+        form.validate({
+          onfocusout: false,
+          onkeyup: false,
+          onclick: false,
+          showErrors: function(errorMap, errorArr) {
+            try {
+              $(errorArr[0].element).focus();
+              art.dialog({
+                id: 'error',
+                icon: 'error',
+                lock: true,
+                fixed: true,
+                background: "#CCCCCC",
+                opacity: 0,
+                content: errorArr[0].message,
+                cancelVal: '确定',
+                cancel: function() {
+                  $(errorArr[0].element).focus()
+                }
+              })
+            } catch(err) {}
+          },
+          rules: {
+            'post[post_title]': {
+              required: 1
+            },
+            'post[post_content]': {
+              editorcontent: true
+            }
+          },
+          messages: {
+            'post[post_title]': {
+              required: '请输入标题'
+            },
+            'post[post_content]': {
+              editorcontent: '内容不能为空'
+            }
+          },
+          highlight: false,
+          onfocusout: false,
+          submitHandler: function(forms) {
+            $(forms).ajaxSubmit({
+              url: form.attr('action'),
+              dataType: 'json',
+              beforeSubmit: function(arr, $form, options) {},
+              success: function(data, statusText, xhr, $form) {
+                if (data.status) {
+                  setCookie("refersh_time", 1);
+                  Wind.use("artDialog",
+                  function() {
+                    art.dialog({
+                      id: "succeed",
+                      icon: "succeed",
+                      fixed: true,
+                      lock: true,
+                      background: "#CCCCCC",
+                      opacity: 0,
+                      content: data.info,
+                      button: [{
+                        name: '继续编辑？',
+                        callback: function() {
+                          return true
+                        },
+                        focus: true
+                      },
+                      {
+                        name: '返回列表页',
+                        callback: function() {
+                          location = "{:U('AdminPost/index')}";
+                          return true
+                        }
+                      }]
+                    })
+                  })
+                } else {
+                  isalert(data.info)
+                }
+              }
+            })
+          }
+        })
+      })
+    });
+  </script>
+</body>
+
+</html>

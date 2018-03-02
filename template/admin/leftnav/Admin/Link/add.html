@@ -1,0 +1,67 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('link/index')}">{:L('ADMIN_LINK_INDEX')}</a></li>
+			<li class="active"><a href="{:U('link/add')}">{:L('ADMIN_LINK_ADD')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('link/add_post')}">     
+        
+        	  <div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('NAME')}</th>
+                        <td>
+                            <input type="text" name="link_name" class="form-control">
+                            <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="必须填写的字段">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_ADDRESS')}</th>
+                        <td>
+                            <input type="text" name="link_url" class="form-control">
+                            <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="必须填写的字段">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_ICON')}</th>
+                        <td>
+                            <input type="text" name="link_image" class="form-control">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_TARGET')}</th>
+                        <td>
+                            <select name="link_target" class="form-control">
+                                <foreach name="targets" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                                </foreach>
+						    </select>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_DESCRIPTION')}</th>
+                        <td>
+                            <textarea name="link_description" rows="5" cols="57" class="form-control"></textarea>
+                            
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                </table>
+            </div>
+                  
+			
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="{:U('link/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

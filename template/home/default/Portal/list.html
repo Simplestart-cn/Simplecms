@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<tc_include file="Public:head" />
+	</head>
+	<body class="landing">
+
+		<!-- Header -->
+		<tc_include file="Public:header" />	
+
+		<!-- Main -->
+			<section id="main" class="container">
+				<header>
+					<h2>{$name}</h2>
+					<p>{$description}--------------</p>
+				</header>
+
+		        <php>$lists = sp_sql_posts_paged_bycatid($cat_id,"order:post_date DESC;",10);</php>
+
+				<volist name="lists['posts']" id="vo">
+					<php>$vo['post_modified'] = date('Y-H-d',strtotime($vo['post_modified']));</php>
+					<div class="box">
+						<span class="image featured"><img src="{:sp_get_asset_path($vo['post_thumb'])}" alt="{$vo.post_title}" /></span>
+						<h3>{$vo.post_title}</h3>
+						<p>{$vo.post_excerpt}</p>
+					</div>
+				</volist> 
+
+
+	            <div class="hidden-xs">
+	              <div class='met_pager'>
+	                {$lists['page']}
+	              </div>
+	            </div>
+
+			</section>
+			
+		<!-- Footer -->
+		<tc_include file="Public:footer" />	
+	</body>
+</html>

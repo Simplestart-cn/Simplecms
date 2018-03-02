@@ -1,0 +1,209 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('User/userinfo')}">{:L('ADMIN_USER_USERINFO')}</a></li>
+			<li><a href="{:U('setting/password')}">{:L('ADMIN_SETTING_PASSWORD')}</a></li>
+		</ul>
+        
+        
+        
+        
+        
+        <div>
+                    <div class="">
+                        <div class="col-xs-12 col-sm-3 text-center">
+                            <div>
+                                <!-- #section:pages/profile.picture -->
+								
+									<a href="#">
+                                       <if condition="$admin['avatar']">
+                    <img id="avatar" class="img-thumbnail" src="{:sp_get_user_avatar_url($admin['avatar'])}" alt="{$admin.user_login}" width="150">
+                    
+                    <else />
+                    <img id="avatar" class="img-thumbnail" src="__TMPL__Public/images/logo-admin.png" alt="{$admin.user_login}" width="150">
+                    </if>
+                                    </a>
+							
+
+                               
+                                
+                                <!--<div class="">
+                                   
+                                        <a href="" class="btn btn-info btn-xs">
+                                            <i class="fa fa-circle text-success"></i>
+                                            &nbsp;
+                                            <span class="white">{$user_nicename}</span>
+                                        </a>
+                                    
+                                </div>-->
+                            </div>
+
+                           
+
+                            <!-- #section:pages/profile.contact -->
+                            <div class="profile-contact-info">
+                                <div class="profile-contact-links align-left">
+                                    <span id="edit" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModaledit">
+                                        <i class="ace-icon fa fa-pencil bigger-120 green"></i>
+                                        修改个人信息
+                                    </span>
+								</div>
+                                <div class="space-6"></div>
+                            </div>
+
+                            <!-- /section:pages/profile.contact -->
+                            <div class="hr hr12 dotted"></div>
+
+                            <!-- #section:custom/extra.grid -->
+                           <!-- <div class="clearfix">
+                                <div class="grid2">
+                                    <span class="bigger-175 blue">{$admin['admin_hits']}</span>
+
+                                    <br />
+                                    登录次数												</div>
+
+                                <div class="grid2">
+                                    <a href="{:U('News/news_list',array('keytype'=>'news_auto','key'=>$admin['admin_id']))}">
+                                        <span class="bigger-175 blue">{$admin['news_count']}</span>
+                                    </a>
+                                    <br />
+                                    文章数												</div>
+                            </div>-->
+
+                            <!-- /section:custom/extra.grid -->
+                            <div class="hr hr16 dotted"></div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-9 row-fluid">
+                            <table class="table table-bordered">
+                            	<tr>
+                                    <th width="200">{:L('NICENAME')}</th>
+                                    <td>
+                                    <span> {$user_nicename} </span>
+                                      
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('GENDER')}</th>
+                                    <td>
+                                        
+                                        <php>$sexs=array("0"=>L('GENDER_SECRECY'),"1"=>L('MALE'),"2"=>L('FEMALE'));</php>
+                                        <foreach name="sexs" item="vo">
+                                            <php>$sexselected=$key==$sex?"block":"";</php>
+                                            <span style=" display:none;display:{$sexselected};">{$vo}</span>
+                                        </foreach>
+                                   
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('BIRTHDAY')}</th>
+                                    <td>                      
+                                        <span>{$birthday}</span>
+                                    
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:L('WEBSITE')}</th>
+                                    <td>                      
+                                       
+                                        {$user_url}
+                                        
+                                    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>{:L('SIGNATURE')}</th>
+                                    <td>                      
+                                       {$signature}
+                                    
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            
+                           
+                        </div>
+                    </div>
+        
+       
+     
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+
+    
+    
+
+        <!-- 显示模态框（Modal） -->
+        
+
+        <!-- 显示修改资料模态框（Modal） -->
+        <div class="modal fade in" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <form class="form-horizontal js-ajax-form" method="post" action="{:U('User/userinfo_post')}">
+                
+                <div class="modal-dialog row-fluid" style=" background:#fff;">
+                    <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('NICENAME')}</th>
+                        <td>
+                            <input type="hidden" name="id" value="{$id}">
+						    <input type="text" id="input-user_nicename" name="user_nicename" value="{$user_nicename}" class="form-control">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('GENDER')}</th>
+                        <td>
+                            <select name="sex" id="input-gender" class="form-control">
+							<php>$sexs=array("0"=>L('GENDER_SECRECY'),"1"=>L('MALE'),"2"=>L('FEMALE'));</php>
+							<foreach name="sexs" item="vo">
+								<php>$sexselected=$key==$sex?"selected":"";</php>
+								<option value="{$key}"{$sexselected}>{$vo}</option>
+							</foreach>
+						</select>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('BIRTHDAY')}</th>
+                        <td>                      
+                            <input class="form-control js-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$birthday}">
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('WEBSITE')}</th>
+                        <td>                      
+                           
+                            <input type="text" id="input-user_url" placeholder="http://simplestart.cn" name="user_url" class="form-control" value="{$user_url}">
+                            
+                        
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>{:L('SIGNATURE')}</th>
+                        <td>                      
+                           <textarea id="input-signature" placeholder="{:L('SIGNATURE')}" class="form-control" name="signature">{$signature}</textarea>
+                        
+                        </td>
+                    </tr>
+                    
+                
+                      
+                    </table>
+                    <div class="form-actions">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+				</div>
+                </div><!-- /.modal-dialog -->
+            </form>
+        </div><!-- /.modal -->
+</body>
+</html>

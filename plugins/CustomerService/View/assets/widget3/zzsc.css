@@ -1,0 +1,48 @@
+
+/*main css*/
+.main-im{ position:fixed; z-index: 100; width: auto; }
+.main-im .qq-a { display: block; width: 106px; height: 106px; font-size: 14px; color: #0484cd; text-align: center; position: relative; }
+.main-im .qq-a span { bottom: 5px; position: absolute; width: 90px; left: 10px; }
+.main-im .qq-hover-c { width: 70px; height: 70px; border-radius: 35px; position: absolute; left: 18px; top: 5px; overflow: hidden; z-index: 9; background-color: #FFF;}
+.im_main .close-im {height: 23px;}
+.main-im .img-qq {max-width: 60px; display: block; position: absolute; left: 6px; top: 3px; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s; }
+.main-im .im-qq:hover .img-qq{ max-width: 70px; left: 1px; top: 8px; position: absolute; }
+.main-im .im_main {border: solid 1px #EEE;border-radius: 10px; background: #F9FAFB;display: block;}
+.main-im .im_main .im-tel { color: #000000; text-align: center; width: 109px; border-bottom: 1px solid #dddddd; }
+.main-im .im_main .im-tel div{font-size: 14px;margin: 5px 0;}
+.main-im .im_main .im-tel .tel-num { font-family: Arial; font-weight: bold; color: #666;font-size: 16px;}
+.main-im .im_main .im-tel:hover { background: #fafafa; }
+.main-im .im_main .weixing-container {width: 54px; height: 47px;}
+
+.main-im .im_main .weixing-container i{padding: 10px 16px;color: #fff;}
+.main-im .im_main .weixing-container i:hover{color: #ddd;}
+.main-im .im_main .weixing-show {width: 112px; height: 172px; background: #ffffff; border-radius: 10px; border: 1px solid #dddddd; position: absolute; top: -126px; }
+.main-im .im_main .weixing-show .weixing-sanjiao {width:0; height: 0; border-style: solid; border-color: transparent transparent transparent #ffffff; border-width: 8px;  top: 138px; position: absolute; z-index: 2;}
+.main-im .im_main .weixing-show .weixing-sanjiao-big { z-index: -1;width: 0; height: 0; border-style: solid; border-color: transparent transparent transparent #dddddd; border-width: 10px; top: 136px; position: absolute; }
+.main-im .im_main .weixing-show .weixing-ma { width: 104px; height: 103px; padding-left: 5px; padding-top: 5px; }
+.main-im .im_main .weixing-show .weixing-txt{position:absolute;top:110px;left:7px;width:100px;margin:0 auto; text-align:center;}
+.main-im .im_main .go-top { width: 53px; height: 47px;}
+.main-im .im_main .go-top a i{padding: 8px 10px;font-size: 26px;color: #fff;}
+.main-im .im_main .go-top a i:hover{color: #ddd;}
+.main-im .close-im a { 
+display: block;
+width: 23px;
+height: 23px;
+border-radius: 100%;
+text-align: center;
+margin: 1px;
+}
+.main-im .close-im a:hover{
+	-webkit-filter: grayscale(30%);
+-moz-filter: grayscale(30%);
+-ms-filter: grayscale(30%);
+-o-filter: grayscale(30%);
+filter: grayscale(30%);
+filter: gray;
+}
+.main-im .close-im a i{font-size: 14px;color: #fff;}
+
+.main-im .close-im a:hover { text-decoration: none; }
+.main-im .open-im { cursor: pointer; width: 40px; height: 133px; font-size: 18px;padding: 10px;color: #fff;display: none; border-radius: 5px;}
+
+.im-footer{border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;}

@@ -1,0 +1,103 @@
+<admintpl file="header"/>
+</head>
+<body>
+<div class="wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="{:U('Admin/backup/index')}">{:L('ADMIN_BACKUP_INDEX')}</a></li>
+  </ul>
+  <div class="common-form">
+        <form action="{:U('Admin/backup/index_post')}" class="form-horizontal" method="post">
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">{:L('VOLUME_SIZE')}</th>
+                            <td>
+                                <input type="text" name="sizelimit" value="{$sizelimit}" size="10" class="form-control"> 
+                                <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="K &nbsp;&nbsp;({:L('VOLUME_SIZE_HELP_TEXT')})"><i class="fa fa-question fa-2x"></i></span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('NAME')}</th>
+                            <td>
+                                <input type="text" name="backup_name" value="{$backup_name}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('BACKUP_TYPE')}</th>
+                            <td>
+                            	<div class="radio">
+                                    <input type="radio" checked="checked" id="backup_type0" value="full" name="backup_type" onClick="javascript:$('#js-showtables').hide();">
+                                    <label for="backup_type0">
+                                       {:L('BACKUP_ALL')}
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" value="custom" id="backup_type1" name="backup_type" onClick="javascript:$('#js-showtables').show();">
+                                    <label for="backup_type1">
+                                       {:L('CUSTOM_BACKUP')}
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+            <div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        
+                        <tr id="js-showtables">
+                            <th width="200">
+                            	<div class="checkbox checkbox-info checkbox-circle">
+                                    <input type="checkbox" value="custom" id="selectall" name="selectall" onClick="javascript:$('.js-checkitem').attr('checked', this.checked);" checked>
+                                    <label for="selectall">
+                                       {:L('SELECT_ALL')}
+                                    </label>
+                                </div>
+                            </th>
+                            <td>
+                            	
+                                <volist name="tables" id="val">
+                                    <div class="checkbox checkbox-info checkbox-circle" style="width: 33%;float: left;">
+                                        
+                                        <input name="backup_tables[{$val}]" type="checkbox" value="-1" checked="checked" class="js-checkitem" id="{$val}"/>
+                                        <label for="{$val}">
+                                           {$val}
+                                        </label>
+                                    </div>
+                               
+                                  
+                                </volist>	                    
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+               <input type="submit" name="dosubmit" value="{:L('START_BACKUP')}" class="btn btn-primary" style="margin-top: 10px; width:100%;">
+            </div>
+	    
+            
+            
+            
+            
+            
+            
+            
+            
+            
+	      
+        </form>
+    </div>
+</div>
+<style type="text/css">
+#js-showtables{display:none;}
+.checkbox.inline{
+	margin-left: 10px;
+}
+</style>
+<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

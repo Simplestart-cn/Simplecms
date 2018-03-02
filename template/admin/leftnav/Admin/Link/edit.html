@@ -1,0 +1,74 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('link/index')}">{:L('ADMIN_LINK_INDEX')}</a></li>
+			<li><a href="{:U('link/add')}">{:L('ADMIN_LINK_ADD')}</a></li>
+            <li class="active"><a href="{:U('link/add')}">{:L('ADMIN_LINK_EDIT')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('link/edit_post')}">
+        
+        
+        
+            <div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('NAME')}</th>
+                        <td>
+                            <input type="text" name="link_name" class="form-control" value="{$link_name}">
+                            <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="必须填写的字段">*</span>
+                            <input type="hidden" name="link_id" value="{$link_id}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_ADDRESS')}</th>
+                        <td>
+                            <input type="text" name="link_url" class="form-control" value="{$link_url}">
+                            <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="必须填写的字段">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_ICON')}</th>
+                        <td>
+                            <input type="text" name="link_image" class="form-control" value="{$link_image}">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_TARGET')}</th>
+                        <td>
+                       
+                            <select name="link_target" class="form-control">
+                                <foreach name="targets" item="vo">
+                                <php>$link_target_selected=$link_target==$key?"selected='selected'":"";</php>
+                                <option value="{$key}" {$link_target_selected}>{$vo}</option>
+                                </foreach>
+					        </select>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('LINK_DESCRIPTION')}</th>
+                        <td>
+                            <textarea name="link_description" rows="5" cols="57" class="form-control">{$link_description}</textarea>
+                            
+                        </td>
+                    </tr>
+                    
+                    
+                    
+                </table>
+            </div>
+            
+            
+			
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				<a class="btn" href="{:U('link/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

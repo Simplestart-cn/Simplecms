@@ -1,0 +1,50 @@
+<admintpl file="header"/>
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('user/cate')}">用户组</a></li>
+			<li class="active"><a href="{:U('user/cate_add')}">添加分组</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" action="{:U('User/cate_add')}" method="post">           
+            <div class="row-fluid">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">分组名称</th>
+                        <td>
+                            <input type="text" name="cate[name]" value="" class="form-control"/>
+                            <span>*</span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>分组描述</th>
+                        <td>
+                            <textarea name="cate[remark]" rows="2" cols="20" class="form-control" style="height: 100px; width: 500px;"></textarea>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>状态</th>
+                        <td>                      
+                            <label class="switch-btn circle-style">
+                                <input class="checked-switch" type="checkbox" name="cate[status]" value="1"  checked>
+                                <span class="text-switch" data-yes="开" data-no="禁"></span> 
+                                <span class="toggle-btn"></span> 
+                            </label>
+                        
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="{:U('User/cate')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

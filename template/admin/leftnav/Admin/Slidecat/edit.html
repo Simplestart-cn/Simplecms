@@ -1,0 +1,50 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('slidecat/index')}">{:L('ADMIN_SLIDECAT_INDEX')}</a></li>
+			<li class="active"><a href="{:U('slidecat/add')}">{:L('ADMIN_SLIDECAT_ADD')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('slidecat/edit_post')}">
+        	<div class="row-fluid">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('NAME')}</th>
+                        <td>
+                            <input type="text" name="cat_name" class="form-control" value="{$cat_name}">
+                            <span>*</span>
+                            <span data-toggle="tooltip" data-placement="right" title="如：首页，列表，文章。代表幻灯的位置," style=""><i class="fa fa-question fa-2x"></i></span>
+                            <input type="hidden" name="cid" value="{$cid}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('CATEGORY_KEY')}</th>
+                        <td>
+                            <input type="text" name="cat_idname" class="form-control" value="{$cat_idname}">
+                            <span>*</span>
+                           
+                            <span data-toggle="tooltip" data-placement="right" title="{:L('CATEGORY_KEY_HELP_TEXT')},如：home_slide," style=""><i class="fa fa-question fa-2x"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('DESCRIPTION')}</th>
+                        <td>
+                           
+                            <textarea name="cat_remark" rows="5" cols="57" class="form-control">{$cat_remark}</textarea>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+			
+			<div class="form-actions">
+				<button class="btn btn-primary js-ajax-submit" type="submit">{:L('SAVE')}</button>
+				<a class="btn" href="{:U('slidecat/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

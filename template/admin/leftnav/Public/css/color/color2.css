@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+/*------------------------------------------------------------------------------------
+
+          TOP导航
+		  
+--------------------------------------------------------------------------------------*/
+/*左侧*/
+body > .header .logo {background-color:#333!important;}
+/*右侧*/
+body > .header .navbar {background-color:#444!important;}
+/*快捷按钮*/
+.nav_shortcuts a {color: rgba(255, 255, 255, 0.8)!important;}
+.nav_shortcuts a:hover{
+background: rgba(0, 0, 0, 0.1)!important;
+color: #f6f6f6!important;
+}
+/*用户区*/
+/*用户下拉颜色*/
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {background-color: #444 !important;}
+/*未读信息下拉*/
+.navbar-nav > .messages-menu > .dropdown-menu > li.header, .navbar-nav > .messages-menu > .dropdown-menu > li.footer a{
+background: #444!important;
+color: #FFF!important;	
+	
+	}
+/*刷新按钮*/
+#right_tools_wrapper {background-color: #444!important;}
+/*------------------------------------------------------------------------------------
+
+          左侧菜单
+
+--------------------------------------------------------------------------------------*/
+/*菜单背景*/
+#nav_wraper {
+background-color: #444!important;
+}
+/*一级菜单按钮*/
+.nav-list>li>a {
+background-color: #333!important;
+color:#fff!important;
+}
+
+.nav-list>li>a:hover, .nav-list>li.open>a {color: #1dd2af!important;background-color: #444!important;
+}
+
+/*一级菜单按钮下横线*/
+.nav-list>li {
+	border:none!important;
+
+}
+
+/*二,三级菜单按钮*/
+.nav-list>li .submenu>li>a{color: #ddd!important;}
+.nav-list>li .submenu>li>a:hover {color: #fff!important;background: none!important;}
+
+

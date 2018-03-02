@@ -1,0 +1,48 @@
+<admintpl file="header" />
+<style>
+li {
+	list-style: none;
+}
+</style>
+</head>
+<body>
+
+	<div class="well" style="width:400px; margin: 20px auto;padding: 20px;">
+		<div class="">
+			<h3 style="margin-top: 0;">应用{$app}菜单导入成功！</h3>
+			<div class="error_cont">
+				<ul style="padding: 0;">
+					<if condition="!empty($newmenus)">
+						<foreach name="newmenus" item="vo">
+						<li>{$vo}</li>
+						</foreach>
+					<else />
+						<li>应用{$app}没有新菜单导入！</li>
+					</if>
+				</ul>
+				
+                
+                <if condition="!empty($nextapp)">
+					<script>
+						setTimeout(function() {
+							location.href = "{:U('admin/menu/spmy_getactions',array('app'=>$nextapp))}";
+						}, 1000);
+					</script>
+					<div class="error_return">
+						<a href="{:U('admin/menu/spmy_getactions',array('app'=>$nextapp))}" class="btn btn-info btn-sm">下一个应用</a>
+						<a href="{:U('admin/menu/lists')}" class="btn btn-default btn-sm" style="margin-left: 10px;">返回</a>
+					</div>
+				<else />
+					<div>全部导入成功！</div>
+					<div class="error_return">
+						<a href="{:U('menu/lists')}" class="btn btn-default btn-sm">返回</a>
+					</div>
+				</if>
+			</div>
+		</div>
+	</div>
+    
+	
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

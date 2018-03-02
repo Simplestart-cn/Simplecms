@@ -1,0 +1,80 @@
+<style type="text/css">
+.suspend{width:40px;position:fixed;top:30%;overflow:hidden;z-index:9999;}
+.suspend dl{height: 100%;box-shadow:0 0 5px #e4e8ec;margin-bottom: 0;position: relative;}
+.suspend dl dt{width:40px;height: 135px;position:absolute;top:0;cursor:pointer;font-size: 16px;display: initial;padding: 11px;color: #fff;font-weight: initial;}
+.suspend dl dd{min-width: 115px;text-align: center;padding: 5px;border-bottom: solid 1px #e1e1e1;}
+.suspend dl dd.suspend-qq{background:#ffffff;}
+.suspend dl dd.suspend-qq:hover, .suspend dl dd.suspend-message:hover{background: #EEEEEE;}
+.suspend dl dd a{display: block;color: #555;}
+.suspend dl dd a i{font-size: 18px;}
+.suspend dl dd a span{display: block;}
+
+</style>
+<php> $color_options=array( '1'=>'#EE4856', '2'=>'#48B2EE', '3'=>'#40C475', '4'=>'#F15828', '5'=>'#637588', '6'=>'#4B4981' );</php>
+<php> $position_options=array( '1'=>'right', '2'=>'left' );</php>
+<div class="suspend" style="{$position_options[$position]}:0; top:{$top}%;">
+
+<php> $position_options=array( '1'=>'left', '2'=>'right' );</php>
+	<dl style="padding-{$position_options[$position]}:40px;">
+		<dt style="background:{$color_options[$color]};background:{$colordiy};{$position_options[$position]}:0;border-top-{$position_options[$position]}-radius: 10px;border-bottom-{$position_options[$position]}-radius: 10px;"><i class="fa fa-commenting-o fa-1x"></i>在线客服</dt>
+		<div style="overflow: hidden;border-bottom: solid 2px;border-bottom: solid 2px;border-top: solid 2px;border-top: solid 2px;border-color:{$color_options[$color]};border-color:{$colordiy};background: #fff;">
+        <div style="border-{$position_options[$position]}: solid 2px};border-{$position_options[$position]}: solid 2px;border-color:{$color_options[$color]};border-color:{$colordiy};">
+            <if condition="empty($qq)">
+            <else/>
+            <dd class="suspend-qq">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes">
+                    <i class="fa fa-qq"></i>
+                    <span>在线咨询</span>
+                </a>
+            </dd>
+            </if>
+            <if condition="empty($message)">
+            <else/>
+            <dd class="suspend-message">
+                <a href="{$message}">
+                    <i class="fa fa-commenting-o"></i>
+                    <span>在线留言</span>
+                </a>            
+            </dd>
+            </if>
+            <if condition="empty($phone)">
+            <else/>
+            <dd class="suspend-phone">
+                <a>
+                    <i class="fa fa-phone"></i>
+                    <span>{$phone}</span>
+                </a>         
+            </dd>
+            </if>
+            <if condition="empty($qrcode)">
+            <else/>
+            <dd class="suspend-phone">
+                <a>
+                    <img src="{$qrcode}" width="108px">                   
+                    <span>扫一扫，关注</span>
+                </a>            
+            </dd>
+            </if>
+        </div>    
+        </div>
+	</dl>
+</div>
+
+<script type="text/javascript">           
+$(document).ready(function(){
+
+	 $(".suspend").mouseover(function() {
+        $(this).stop();
+        $(this).animate({width: 160}, 200);
+    })
+	
+    $(".suspend").mouseout(function() {
+        $(this).stop();
+        $(this).animate({width: 40}, 200);
+    });
+	
+});
+</script>
+
+	
+

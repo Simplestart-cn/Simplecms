@@ -1,0 +1,95 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#" data-toggle="tab">{:L('ADMIN_MAILER_INDEX')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('Admin/mailer/index_post')}">
+        
+        
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">{:L('SENDER_NAME')}</th>
+                            <td>
+                                <input type="text" name="sender" value="{$Think.config.SP_MAIL_SENDER}" class="form-control"/>
+                                <span data-toggle="tooltip" data-placement="right" title="填写发件人名称，如：简易CMS"><i class="fa fa-question fa-2x"></i></span>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('SENDER_EMAIL_ADDRESS')}</th>
+                            <td>
+                                <input type="text" name="address" value="{$Think.config.SP_MAIL_ADDRESS}" class="form-control"/>
+                                <span data-toggle="tooltip" data-placement="right" title="填写您的邮件，如：215625271@qq.com"><i class="fa fa-question fa-2x"></i></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('SENDER_SMTP_SERVER')}</th>
+                            <td>
+                            	<input type="text" name="smtp" value="{$Think.config.SP_MAIL_SMTP}" placeholder="如：smtp.qq.com" class="form-control"/>	
+                                <span data-toggle="tooltip" data-placement="right" title="填写您的邮件，如：smtp.qq.com，具体设置请查看邮件服务商"><i class="fa fa-question fa-2x"></i></span>                    
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>SMTP服务器端口</th>
+                            <td>
+                            	<input type="text" name="smtp_port" value="{$Think.config.SP_MAIL_SMTP_PORT}" placeholder="默认为465" class="form-control"/>	                    
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>链接方式</th>
+                            <td>
+                            	<input type="text" name="smtpsecure" value="{$Think.config.SP_MAIL_SECURE}" placeholder="如：ssl" class="form-control"/>	
+                                                  
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>{:L('SMTP_MAIL_ADDRESS')}</th>
+                            <td>
+                            	<input type="text" name="loginname" value="{$Think.config.SP_MAIL_LOGINNAME}" class="form-control"/>	
+                                <span data-toggle="tooltip" data-placement="right" title="与上面邮件地址一致"><i class="fa fa-question fa-2x"></i></span>                                        
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('SMTP_MAIL_PASSWORD')}</th>
+                            <td>
+                            	<input type="password" name="password" value="{$Think.config.SP_MAIL_PASSWORD}" class="form-control"/>	                    
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>收件地址</th>
+                            <td>
+                            	<input type="email" name="test_address" value="{$Think.config.SP_MAIL_TEST_ADDRESS}" class="form-control"/>	
+                                <span data-toggle="tooltip" data-placement="right" title="根据邮件模板配置，网站留言咨询等的信息，会发送到这个邮箱"><i class="fa fa-question fa-2x"></i></span>                                        
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>保存前测试</th>
+                            <td>
+                             
+                                <label class="switch-btn circle-style">
+                                    <input class="checked-switch" type="checkbox" name="test" value="1">
+                                    <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                    <span class="toggle-btn"></span> 
+                                </label>       
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+		
+				<div class="form-actions" style="padding:20px;">
+					<button type="submit" class="btn btn-primary btn-block js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

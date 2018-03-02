@@ -1,0 +1,170 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+	        <li class="active"><a href="#A" data-toggle="tab">{:L('GENERAL_SETTING')}</a></li>
+	        <li><a href="#B" data-toggle="tab">{:L('SEO_SETTING')}</a></li>
+	        <li><a href="#C" data-toggle="tab">{:L('TEMPLATE_SETTING')}</a></li>
+	    </ul>
+		<form class="form-horizontal js-ajax-form" action="{:U('AdminTerm/add_post')}" method="post">
+			<div class="tabbable">
+		        <div class="tab-content">
+
+                  <div class="row-fluid tab-pane active" id="A">
+                        <div class="col-sm-9">			
+                        <table class="table table-bordered">
+                            <tr>
+                                <th width="200">{:L('PARENT')}</th>
+                                <td>
+                                    <select name="parent" class="form-control" style="min-width:220px;">
+										<option value="0">{:L('ROOT')}</option>
+										{$terms_tree}
+									</select>
+                                    <span data-toggle="tooltip" data-placement="right" title="上一级目录" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th width="200">分类模型</th>
+                                <td>
+                                   
+									<select name="model_id" class="form-control" style="min-width:220px;">
+                                    <option value="0">不选择</option>
+										<foreach name="model" item="vo">
+								        	<option value="{$vo.id}">{$vo.model_name}</option>
+										</foreach>
+									</select>
+                                    <span data-toggle="tooltip" data-placement="right" title="上一级目录" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('NAME')}</th>
+                                <td>
+                                    <input type="text" name="name" class="form-control" style="min-width:220px;" value="">
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('CATEGORY_DESCRIPTION')}</th>
+                                <td>
+                                    <textarea name="description" rows="5" class="form-control" cols="57"></textarea>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <div class="col-sm-3">
+                          <table class="table table-bordered">
+                            <tr>
+                              <th>封面图</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                <div class="uploader" data-filenumlimit="1" data-files=''>
+                                  <div class="queueList">
+                                    <div class="placeholder">
+                                      <div class="pickerArea"></div>
+                                      <p>或将照片拖到这里，单次最多可选1张</p>
+                                    </div>
+                                  </div>
+                                  <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                      <span class="text">0%</span>
+                                      <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                      <div class="pickerBtn"></div>
+                                      <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                  </div>
+                                  <input type="hidden" name="thumb" class="field" value="">
+                                </div>
+                              </td>
+                            </tr>
+                            </table>
+                        </div>
+                  </div>
+		          
+		          <div class="row-fluid tab-pane" id="B">
+                  		<table class="table table-bordered">
+                            <tr>
+                                <th width="200">{:L('SEO_TITLE')}</th>
+                                <td>
+                                    
+                                    <input type="text" name="seo_title" class="form-control" value="">
+                                    <span data-toggle="tooltip" data-placement="right" title="设置页面相关的标题，有利于搜索引擎的抓取收录" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('SEO_KEYWORDS')}</th>
+                                <td>
+                                    
+                                    <input type="text" name="seo_keywords" class="form-control" style="min-width:300px;" value="">
+                                    <span data-toggle="tooltip" data-placement="right" title="关键词用逗号隔开" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('SEO_DESCRIPTION')}</th>
+                                <td>
+                                    
+                                    <textarea name="seo_description" rows="5" class="form-control" cols="57"></textarea>
+                                    <span data-toggle="tooltip" data-placement="right" title="百度收录的摘要描述" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                        </table>
+						
+		          </div>
+		          <div class="row-fluid tab-pane" id="C">
+                  		<php>$tpl_list=sp_admin_get_tpl_file_list();</php>
+                  		<table class="table table-bordered">
+                            <tr>
+                                <th width="200">{:L('LIST_TEMPLATE')}</th>
+                                <td>
+                                    <php>
+										$list_tpls=$tpl_list;
+										unset($list_tpls['list']);
+									</php>
+				              		<select  name="list_tpl" class="form-control">
+				              			<option value="list">list{:C("TMPL_TEMPLATE_SUFFIX")}</option>
+				              			<foreach name="list_tpls" item="vo">
+				              				<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
+				              			</foreach>
+				              		</select>
+                                    <span data-toggle="tooltip" data-placement="right" title="配置分类列表页的模板，" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('ARTICLE_TEMPLATE')}</th>
+                                <td>
+                                    <php>
+										$article_tpls=$tpl_list;
+										unset($article_tpls['article']);
+									</php>
+				              		<select  name="one_tpl" class="form-control">
+				              			<option value="article">article{:C("TMPL_TEMPLATE_SUFFIX")}</option>
+				              			<foreach name="article_tpls" item="vo">
+				              				<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
+				              			</foreach>
+				              		</select>
+                                    <span data-toggle="tooltip" data-placement="right" title="配置分类文章页的模板，" style=""><i class="fa fa-question fa-2x"></i></span>
+                                </td>
+                            </tr>
+                        </table>
+						
+		          </div>
+		        </div>
+		    </div>
+		    <div class="form-actions">
+		     	<button class="btn btn-primary js-ajax-submit"type="submit">{:L('ADD')}</button>
+		      	<a class="btn" href="{:U('AdminTerm/index')}">{:L('BACK')}</a>
+		    </div>
+		</form>
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+    <!--引入uploader JS-->
+  <script type="text/javascript" src="__PUBLIC__/js/webuploader/webuploader.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/js/webuploader/uploadhandle.js"></script>
+</body>
+</html>

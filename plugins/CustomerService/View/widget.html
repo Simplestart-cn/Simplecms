@@ -1,0 +1,92 @@
+<style type="text/css">
+.floating_ck{position:fixed;top:30%;z-index: 111;}
+.floating_ck dl{margin: 0;}
+.floating_ck dl dd{position:relative;width:60px;height:60px;padding: 6px 0;border-bottom:solid 1px rgba(0, 0, 0, 0.1);text-align:center;background-repeat:no-repeat;background-position:center 20%;cursor:pointer;}
+.floating_ck dl dd a{color: #FFF;}
+.floating_ck dl dd a i{margin-bottom: 2px;}
+.floating_ck dl dd:hover{background-color:#333;background-color: rgba(0, 0, 0, 0.04);}
+.floating_ck dl dd:hover .floating_left, .floating_ck dl dd:hover .floating_right{display:block;}
+.floating_ck dd span{color:#fff;display:block;padding-top:1px;font-size: 11px;}
+.floating_left{position:absolute;right:-160px;top:0px;width:160px;height:60px;display:none;
+-webkit-filter: grayscale(10%);
+-moz-filter: grayscale(10%);
+-ms-filter: grayscale(10%);
+-o-filter: grayscale(10%);
+filter: grayscale(10%);
+filter: gray;
+}
+.floating_right{position:absolute;left:-160px;top:0px;width:160px;height:60px;display:none;
+-webkit-filter: grayscale(10%);
+-moz-filter: grayscale(10%);
+-ms-filter: grayscale(10%);
+-o-filter: grayscale(10%);
+filter: grayscale(10%);
+filter: gray;
+}
+.floating_left a, .floating_right a{color:#fff;line-height:60px;}
+.floating_ewm{height:260px;top:-200px;}
+.floating_ewm img{display:block;width:145px;height:145px;margin:auto;margin-top:7px;}
+.floating_ewm p{color:#fff;margin-top:5px;}
+.floating_ewm .qrcord_p01{font-size:12px;line-height:20px;}
+.floating_ewm .qrcord_p02{font-size:18px;}
+</style>
+
+
+	 <php>
+    $color_options=array( '1'=>'#EE4856', '2'=>'#48B2EE', '3'=>'#40C475', '4'=>'#F15828', '5'=>'#637588', '6'=>'#4B4981' );
+    </php>
+    <php> $position_options=array( '1'=>'right', '2'=>'left' );</php>
+
+    <div class="floating_ck" style="background:{$color_options[$color]};background:{$colordiy};{$position_options[$position]}:0px; top:{$top}%;">
+        <dl>
+            <dt></dt>
+            <if condition="empty($qq)">
+            <else />
+            <dd class="fd-kf-qq"> 
+            	<a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes">
+            	<i class="fa fa-qq fa-2x"></i>
+                <span>在线咨询</span>
+                </a>
+               
+                <div class="floating_{$position_options[$position]}" style="background:{$color_options[$color]};background:{$colordiy};"><a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes">真空技术在线咨询</a></div>
+            </dd>
+            </if>
+            <if condition="empty($message)">
+            <else/>
+            <dd class="fd-kf-message">
+            	<a href="{$message}">
+            	<i class="fa fa-commenting-o fa-2x"></i>
+                <span>在线留言</span>
+                </a>
+                <div class="floating_{$position_options[$position]}" style="background:{$color_options[$color]};background:{$colordiy};"><a href="{$message}">问题在线留言</a></div>
+            </dd>  
+            </if>
+            <if condition="empty($phone)">
+            <else />
+            <dd class="fd-kf-phone"> 
+            	<a>
+            	<i class="fa fa-phone fa-2x"></i>
+                <span>电话咨询</span>
+                </a>
+                <div class="floating_{$position_options[$position]}" style="background:{$color_options[$color]};background:{$colordiy};"><a>{$phone}</a></div>
+            </dd>
+            </if> 
+            <if condition="empty($qrcode)">
+            <else />        
+            <dd class="fd-kf-qrcode">
+            	<a>
+            	<i class="fa fa-qrcode fa-2x"></i>
+                <span>扫一扫</span>
+                </a>
+                <div class="floating_{$position_options[$position]} floating_ewm" style="background:{$color_options[$color]};background:{$colordiy};">
+                    <img src="{$qrcode}">
+                    <p class="qrcord_p01">扫一扫<br>关注有惊喜</p>
+                    <p class="qrcord_p02">全国免费服务热线<br><b>{$phone}</b></p>
+                </div>
+            </dd>
+            </if> 
+            
+            
+        </dl>
+    </div>
+

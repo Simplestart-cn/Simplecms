@@ -1,0 +1,17 @@
+<header id="header" class="alt reveal">
+	<h1><a href="index.html">Simple <span>cms</span></a></h1>
+	<nav id="nav">
+		<?php
+	        
+	        $filetpl="<a href='\$href' target='\$target'>\$title</a>";
+	        $foldertpl="<a href='\$href' target='\$target' class='dropdown-toggle' title='\$title'>\$title</a>";
+	        $ul_id="ul_id";
+	        $ul_class="ul-class";
+	        $li_class="li-class" ;
+	        $sub_ul_class="dropdown-menu" ; 
+	        $showlevel=6;
+	        $has_child_class='dropdown';
+	        echo sp_get_menu("main",$ul_id,$filetpl,$foldertpl,$sub_ul_class,$li_class,$ul_class,$showlevel,$has_child_class);
+	    ?>
+	</nav>
+</header>

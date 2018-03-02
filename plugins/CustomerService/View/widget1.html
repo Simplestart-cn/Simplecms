@@ -1,0 +1,106 @@
+<style>
+#cs_box {width:120px; color:#FFF; position:fixed; top:30%; border-radius:10px; z-index:1000}
+#cs_box span {height:20px; line-height:20px;display:block;}
+#cs_box span.cs_close {line-height: 17px;color:#FFF; position:absolute; right:10px; top: 10px;border-radius: 100%; cursor:pointer; font-size:18px;font-family:Verdana, Geneva, sans-serif;width: 20px;text-align: center;}
+#cs_box span.cs_close:hover{color:#F03;background: rgba(3, 3, 3, 0.5);}
+.cs_title {font-size:14px; margin:10px; font-weight:bold;}
+.cs_img {width:100px; height:100px; background:#FFF; margin:10px; }
+.cs_info {font-size:12px; margin:0px 10px; overflow:hidden; text-align:center;}
+.cs_phone{font-weight: bold;font-size:14px; margin:0px 6px; overflow:hidden; text-align:center;margin-bottom:8px;}
+.cs_btn {width:100px; height:25px; background:#333;background: rgba(3, 3, 3, 0.29); margin:5px 10px; border-radius:5px; font-size:12px; line-height:25px;  text-align:center; cursor:pointer;}
+.cs_btn:hover{background: rgba(3, 3, 3, 0.5);}
+.cs_btn a{color:#FFF;}
+</style>
+
+<php> 
+$color_options=array( '1'=>'#EE4856', '2'=>'#48B2EE', '3'=>'#40C475', '4'=>'#F15828', '5'=>'#637588', '6'=>'#4B4981' ); 
+</php>
+<php> 
+$position_options=array( '1'=>'right', '2'=>'left' ); 
+</php>
+<div id='cs_box' style="background:{$color_options[$color]};background:{$colordiy};{$position_options[$position]}:0px;top:{$top}%;">
+	<span class='cs_title'>在线咨询</span>
+	<span class='cs_close'>x</span>
+    <if condition="empty($qrcode)">
+    <else/>
+	<img class='cs_img' src="{$qrcode}">
+    </if>
+    <span class='cs_info'>有什么可以帮到你</span>
+    <if condition="empty($qq)">
+    <else/>
+	<div class='cs_btn'><a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes">点击咨询</a></div>
+    </if>
+    <if condition="empty($message)">
+    <else/>
+    <div class='cs_btn'><a href="{$message}">在线留言</a></div>
+    </if>
+    <if condition="empty($phone)">
+    <else/>
+    <span class='cs_info'><i class="fa fa-phone fa-fw"></i>咨询热线</span>
+    <span class='cs_phone'>{$phone}</span>
+    </if>
+    
+</div>
+<!-- 代码部分begin -->
+
+<script>
+function myEvent(obj,ev,fn){
+	if (obj.attachEvent){
+		obj.attachEvent('on'+ev,fn);
+	}else{
+		obj.addEventListener(ev,fn,false);
+	};
+};
+function getByClass(obj,sClass){
+	var array = [];
+	var elements = obj.getElementsByTagName('*');
+	for (var i=0; i<elements.length; i++){
+		if (elements[i].className == sClass){
+			array.push (elements[i]);
+		};
+	};
+	return array;
+};
+var cs_box = {
+	set : function(json){
+		this.box = document.getElementById('cs_box');		
+		this.cs_close();
+	},	
+	cs_close : function(){
+		this.btn = getByClass(this.box,'cs_close')[0];
+		var _this = this;
+		var speed = 0;
+		var timer = null;
+		var sh = document.documentElement.clientHeight || document.body.clientHeight;
+		this.btn.onclick = function(){
+			clearInterval(timer);
+			timer = setInterval(function(){
+				speed += 2;
+				var t = _this.box.offsetTop + speed;
+				if (t >= sh-_this.box.offsetHeight){
+					speed *= -0.4;
+					t = sh-_this.box.offsetHeight;
+				};
+				if (Math.abs(speed)<2)speed = 0;
+				if (speed == 0  && sh-_this.box.offsetHeight == t){
+					clearInterval(timer);
+					_this.fn();
+				};
+				_this.box.style.top = t + 'px';
+			}, 25);
+		};
+	},
+	fn : function(){
+		var _this = this;
+		var timer = setTimeout(function(){
+			_this.box.style.display = 'none';
+		}, 200);
+	},
+};
+myEvent(window,'load',function(){
+	cs_box.set({
+		
+	});
+});
+</script>
+<!-- 代码部分end -->

@@ -1,0 +1,144 @@
+<link href="__PLUGINTMPL__/assets/widget3/zzsc.css" rel="stylesheet" type="text/css">
+
+<php> $color_options=array( '1'=>'#EE4856', '2'=>'#48B2EE', '3'=>'#40C475', '4'=>'#F15828', '5'=>'#637588', '6'=>'#4B4981' );</php>
+<php> $position_options=array( '1'=>'right', '2'=>'left' );</php>
+<div class="main-im" style="{$position_options[$position]}:1px; top:{$top}%;">
+  <div id="open_im" class="open-im" style="{$position_options[$position]}: 0;background:{$color_options[$color]};background:{$colordiy};">在线客服</div>  
+  <div class="im_main" id="im_main">
+  <php> $position_options=array( '1'=>'left', '2'=>'right' );</php>
+    <div id="close_im" class="close-im"><a href="javascript:void(0);" style="background:{$color_options[$color]};background:{$colordiy};float:{$position_options[$position]};"><i class="fa fa-close"></i></a></div>
+    <if condition="empty($qq)">
+    <else/>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes" class="im-qq qq-a">
+    <div class="qq-container"></div>
+    <div class="qq-hover-c" style="background:{$color_options[$color]};background:{$colordiy};"><img class="img-qq" src="__PLUGINTMPL__assets/widget3/qq.png"></div>
+    <span><i class="fa fa-qq fa-fw"></i>在线咨询</span> </a>
+    </if>
+    <if condition="empty($phone)">
+    <else/>
+    <div class="im-tel">
+      <div>热线</div>
+      <div class="tel-num">{$phone}</div>     
+    </div>
+    </if>
+    <div class="im-footer" style="position:relative;background:{$color_options[$color]};background:{$colordiy};">
+      <div class="weixing-container" style="float:{$position_options[$position]};">
+      <i class="fa fa-qrcode fa-2x"></i>
+        <div class="weixing-show" style="{$position_options[$position]}:-125px;">
+           <div class="weixing-txt">微信扫一扫<br>关注我们<br>获取更多惊喜</div>
+          <img class="weixing-ma" src="{$qrcode}">
+         
+          <div class="weixing-sanjiao" style="{$position_options[$position]}:108px;"></div>
+          
+          <div class="weixing-sanjiao-big" style="{$position_options[$position]}:110px;"></div>
+        </div>
+      </div>
+      <div style="width: 1px;background: #F9FAFB;height: 47px;float:{$position_options[$position]};"></div>
+       <php> $position_options=array( '1'=>'right', '2'=>'left' );</php>
+      <div class="go-top" style="float:{$position_options[$position]};"><a href="javascript:;" title=""><i class="fa fa-commenting-o fa-2x"></i></a> </div>
+	 <div style="clear:both"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--<div class="suspend" style="{$position_options[$position]}:0; top:{$top}%;">
+    <dl style="padding-{$position_options[$position]}:40px;">
+		<dt style="background:{$color_options[$color]};background:{$colordiy};{$position_options[$position]}:0;border-top-{$position_options[$position]}-radius: 10px;border-bottom-{$position_options[$position]}-radius: 10px;"><i class="fa fa-commenting-o fa-1x"></i>在线客服</dt>
+		<div style="overflow: hidden;border-bottom: solid 2px;border-bottom: solid 2px;border-top: solid 2px;border-top: solid 2px;border-color:{$color_options[$color]};border-color:{$colordiy};background: #fff;">
+        <div style="border-{$position_options[$position]}: solid 2px};border-{$position_options[$position]}: solid 2px;border-color:{$color_options[$color]};border-color:{$colordiy};">
+            <if condition="empty($qq)">
+            <else/>
+            <dd class="suspend-qq">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes">
+                    <i class="fa fa-qq"></i>
+                    <span>在线咨询</span>
+                </a>
+            </dd>
+            </if>
+            <if condition="empty($message)">
+            <else/>
+            <dd class="suspend-message">
+                <a href="{$message}">
+                    <i class="fa fa-commenting-o"></i>
+                    <span>在线留言</span>
+                </a>            
+            </dd>
+            </if>
+            <if condition="empty($phone)">
+            <else/>
+            <dd class="suspend-phone">
+                <a>
+                    <i class="fa fa-phone"></i>
+                    <span>{$phone}</span>
+                </a>         
+            </dd>
+            </if>
+            <if condition="empty($qrcode)">
+            <else/>
+            <dd class="suspend-phone">
+                <a>
+                    <img src="{$qrcode}" width="108px">                   
+                    <span>扫一扫，关注</span>
+                </a>            
+            </dd>
+            </if>
+        </div>    
+        </div>
+	</dl>
+</div>-->
+
+<script type="text/javascript">           
+$(function(){
+	$('#open_im').bind('click',function(){
+		$('#main-im').css("height","272");
+		$('#im_main').show();
+		$(this).hide();
+	});
+	$('#close_im').bind('click',function(e){
+		$('#main-im').css("height","0");
+		$('#im_main').hide();
+		$('#open_im').show();
+	});
+	
+	$('.go-top').bind('click',function(){
+		$(window).scrollTop(0);
+	});
+	$(".weixing-container").bind('mouseenter',function(){
+		$('.weixing-show').show();
+	})
+	$(".weixing-container").bind('mouseleave',function(){        
+		$('.weixing-show').hide();
+	});
+});
+</script>
+
+	
+

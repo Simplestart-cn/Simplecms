@@ -1,0 +1,81 @@
+<admintpl file="header"/>
+<body>
+<div class="wrap js-check-wrap">
+  <ul class="nav nav-tabs">
+     <li><a href="javascript:history.go(-1)"><i class="fa fa-reply fa-fw"></i>返回</a></li>
+     <li class="active"><a>浮动客服管理</a></li>
+  </ul>
+  <div class="common-form">
+
+        <form method="post" class="form-horizontal js-ajax-form" action="{:sp_plugin_url('CustomerService://AdminIndex/setting_post')}">
+             <!--隐藏部分-->
+             
+             <input type="hidden" name="id" value="{$id}" readonly>
+             <input type="hidden" name="config[kftheme]" value="{$plugins.kftheme}">
+             <input type="hidden" name="config[color]" value="{$plugins.color}">
+             <input type="hidden" name="config[colordiy]" value="{$plugins.colordiy}">
+             <input type="hidden" name="config[position]" value="{$plugins.position}">  
+             <input type="hidden" name="config[top]" value="{$plugins.top}">                                                       
+                                                                                
+             <!---->
+        
+            <div class="control-group">						
+                <label class="control-label" for="qq">QQ号码</label>
+                <div class="controls">
+                    <input type="text" name="config[qq]" class="text input-large" value="{$plugins.qq}" id="qq">
+                   							
+                </div>					
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="phone">电话号码	</label>
+                    <div class="controls">
+                        <input type="text" name="config[phone]" class="text input-large" value="{$plugins.phone}" id="phone">
+                       							
+                    </div>					
+                </div>
+            <div class="control-group">
+                <label class="control-label" for="message">留言地址</label>
+                <div class="controls">
+                    <input type="text" name="config[message]" class="text input-large" value="{$plugins.message}" id="message">
+                 							
+                </div>					
+            </div>
+          
+            
+            
+           						
+            <div class="control-group">
+                
+            	<label class="control-label" for="qrcode">二维码</label>
+                <div class="controls">
+                <a href="javascript:void(0);" onClick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
+                
+                    <if condition="empty($plugins['qrcode'])">
+                    <img src="__PLUGINTMPL__/assets/images/headicon_50.png" id="thumb_preview" width="width: 50px;" style="cursor: hand" />
+                    <else />
+                    <img src="{$plugins.qrcode}" id="thumb_preview" width="100px;" style="cursor: hand"/>
+                    </if>
+									</a>
+                             <input type="button" class="btn btn-small" onClick="$('#thumb_preview').attr('src','__PLUGINTMPL__/assets/images/headicon_50.png');$('#thumb').val('');return false;" value="取消二维码">
+                    <input type="hidden" name="config[qrcode]" class="text input-large" value="" id="thumb">
+                   	
+                   						
+                </div>
+                
+            
+                          
+            </div>        
+        
+           
+            <div class="form-actions">
+            
+                <button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
+            
+            </div>
+		</form>
+  </div>
+</div>
+<script src="__PUBLIC__/js/common.js?"></script>
+<script type="text/javascript" src="__PLUGINTMPL__js/admin.js"></script>
+</body>
+</html>

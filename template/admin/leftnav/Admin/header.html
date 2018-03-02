@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- HTML5 shim for IE8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->  
+    <link href="__ROOT__/{:C('SP_ADMIN_TMPL_PATH')}{:C('SP_ADMIN_DEFAULT_THEME')}/Public/frame/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
+    <link href="__ROOT__/{:C('SP_ADMIN_TMPL_PATH')}{:C('SP_ADMIN_DEFAULT_THEME')}/Public/css/adminstyle.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/js/artDialog/skins/default.css" rel="stylesheet" />
+    <link href="__ROOT__/{:C('SP_ADMIN_TMPL_PATH')}{:C('SP_ADMIN_DEFAULT_THEME')}/Public/frame/font-awesome/4.4.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/webuploader/webuploader.css">
+    
+<script type="text/javascript">
+//全局变量
+var GLOBALCONF = {
+    HOST:"{$_SERVER['HTTP_HOST']}",
+    ROOT: "__ROOT__",
+    JS_ROOT: "__PUBLIC__/js/",
+    TOKEN: ""
+};
+</script>
+<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/wind.js"></script>
+    <script src="__ROOT__/{:C('SP_ADMIN_TMPL_PATH')}{:C('SP_ADMIN_DEFAULT_THEME')}/Public/frame/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<if condition="APP_DEBUG">
+	<style>
+		#think_page_trace_open{
+			z-index:9999;
+		}
+	</style>
+</if>
+<script type="text/javascript">
+/*唤醒bootstrap的title提示*/
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>

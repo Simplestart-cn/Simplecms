@@ -1,0 +1,37 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('AdminTerm/index')}">{:L('PORTAL_ADMINTERM_INDEX')}</a></li>
+			<li><a href="{:U('AdminTerm/add')}">{:L('PORTAL_ADMINTERM_ADD')}</a></li>
+		</ul>
+		<form method="post" class="js-ajax-form" action="{:U('AdminTerm/listorders')}">
+			<div class="table-actions">
+				<button type="submit" class="btn btn-primary btn-sm js-ajax-submit"><i class="fa fa-sort-amount-asc fa-fw"></i>{:L('SORT')}</button>
+            </div>
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						<th width="50">{:L('SORT')}</th>
+						<th width="50">ID</th>
+						<th>{:L('NAME')}</th>
+                        
+                        <th width="100">模型</th>
+						<th width="100">{:L('CATEGORY_TYPE')}</th>
+                        <th width="100">列表页模板</th>
+                        <th width="100">内页模板</th>
+						<th width="120">{:L('ACTIONS')}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{$taxonomys}
+				</tbody>
+		
+			</table>
+			
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<admintpl file="header"/>
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('rbac/index')}">{:L('ADMIN_RBAC_INDEX')}</a></li>
+			<li class="active"><a href="{:U('rbac/roleadd')}">{:L('ADMIN_RBAC_ROLEADD')}</a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" action="{:U('Rbac/roleadd_post')}" method="post">           
+            <div class="row-fluid">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="200">{:L('ROLE_NAME')}</th>
+                        <td>
+                            <input type="text" name="name" value="" id="rolename" class="form-control"/>
+                            <span>*</span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('ROLE_DESCRIPTION')}</th>
+                        <td>
+                            <textarea name="remark" rows="2" cols="20" id="remark" class="form-control" style="height: 100px; width: 500px;"></textarea>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{:L('STATUS')}</th>
+                        <td>                      
+                            <label class="switch-btn circle-style">
+                                <input class="checked-switch" type="checkbox" name="status" value="1"  checked>
+                                <span class="text-switch" data-yes="开" data-no="禁"></span> 
+                                <span class="toggle-btn"></span> 
+                            </label>
+                        
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="{:U('rbac/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

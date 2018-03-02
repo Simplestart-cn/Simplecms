@@ -1,0 +1,72 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#" data-toggle="tab">注册{:L('ADMIN_MAILER_ACTIVE')}</a></li>
+            
+            <li><a href="{:U('Admin/Mailer/message')}" target="_self">留言{:L('ADMIN_MAILER_ACTIVE')}</a></li>
+           
+		</ul>
+		<div class="common-form">
+			<form method="post" class="form-horizontal js-ajax-form" action="{:U('Admin/mailer/active_post')}"> 
+            
+            	 <div class="row-fluid">			
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="200">{:L('EMAIL_ACTIVATION')}</th>
+                                <td>
+                                	<php> 
+                                    $radio='';
+                                    if(C('SP_MEMBER_EMAIL_ACTIVE')==1){ 
+                                        $radio=' checked';       
+                                    }
+                                    </php> 
+                                    <label class="switch-btn circle-style">
+                                        <input class="checked-switch" type="checkbox" name="lightup" value="1" {$radio}/>
+                                        <span class="text-switch" data-yes="开" data-no="关"></span> 
+                                        <span class="toggle-btn"></span> 
+                                    </label>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('EMAIL_SUBJECT')}</th>
+                                <td>
+                                    <input type="text" name="options[title]" value="{$options.title}" class="form-control"/>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>{:L('EMAIL_TEMPLATE')}</th>
+                                <td>
+                                   <script type="text/plain" id="content" name="options[template]">{$options.template}</script>
+								<span style="color: #F00;">{:L('EMAIL_TEMPLATE_HELP_TEXT_REGISTER',array('link'=>'http://#link#','username'=>'#username#'))}</span>
+                                </td>
+                            </tr>
+                   
+                       </tbody>
+                  </table>
+                </div>          
+            	           
+				
+				<div class="form-actions" style="padding:20px;">
+					<button type="submit" class="btn btn-primary btn-block js-ajax-submit">{:L('SAVE')}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+		//编辑器路径定义
+		var editorURL = GLOBALCONF.ROOT;
+	</script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript">
+		var editorcontent = new baidu.editor.ui.Editor();
+		editorcontent.render('content');
+	</script>
+</body>
+</html>

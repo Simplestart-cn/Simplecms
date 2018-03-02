@@ -1,0 +1,101 @@
+<admintpl file="header" />
+<body>
+<style>
+    .show_img{
+        float: left;
+        min-height: 138px;
+        width: 160px;
+        text-align: center;
+        position: relative;
+        margin: 5px;
+        color: #fff;
+		background: #FBBC05;
+        border: 1px solid #ccc;
+    }
+    .show_img .img{
+        width: 100%;
+        height: 100%;
+        display: block;
+		color: #fff;
+		
+    }
+    .show_img .img span{
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: rgba(68, 63, 63, 0.59);
+		overflow: hidden;
+    }
+    .show_img .delete{
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        background-color: red;
+        color: #fff;
+		font-weight: bold;
+		display: none;
+    }
+	.wrap.dele .show_img .delete {
+		display:block;
+		}
+	.show_img a img{max-width: 160px;max-height: 138px;}
+	.show_img .img i{
+		
+		font-size: 60px;
+line-height: 120px;
+padding-bottom: 16px;
+}
+</style>
+
+<div class="wrap js-check-wrap">
+    
+    <if condition="$page_index">
+    <ul class="nav nav-tabs">
+        
+        <li><a href="{:sp_plugin_url('Templet://AdminIndex/index')}">{:L('INDEX_PAGE')}</a></li>
+        <li class="active"><a href="javascript:history.go(-1)">{:L('UP_PAGE')}</a></li>
+         <li style="float:right">
+        <button class="dele-btn btn btn-small js-ajax-submit" type="submit" data-action="/simplecms/index.php?g=Comment&amp;m=Commentadmin&amp;a=check&amp;check=1" data-subcheck="true">编辑</button>
+        <button class="cancel-btn btn btn-small js-ajax-submit" type="submit" data-action="/simplecms/index.php?g=Comment&amp;m=Commentadmin&amp;a=check&amp;uncheck=1" data-subcheck="true">取消编辑</button>
+        
+    </li>
+    </ul>
+        <else />
+    <ul class="nav nav-tabs">
+        
+        <li class="active"><a href="{:sp_plugin_url('Templet://AdminIndex/index')}">{:L('INDEX_PAGE')}</a></li>
+        <li style="float:right">
+        <button class="dele-btn btn btn-small js-ajax-submit" type="submit" data-action="/simplecms/index.php?g=Comment&amp;m=Commentadmin&amp;a=check&amp;check=1" data-subcheck="true">编辑</button>
+        <button class="cancel-btn btn btn-small js-ajax-submit" type="submit" data-action="/simplecms/index.php?g=Comment&amp;m=Commentadmin&amp;a=check&amp;uncheck=1" data-subcheck="true">取消编辑</button>
+        
+    </li>
+    </ul>
+    </if>
+    
+   
+    {$file}
+    
+    <div class="show_img">
+                <a class="img" href="JavaScript:;" onClick="javascript:flashupload('albums_images', '图片上传','photos',change_images,'10,gif|jpg|jpeg|png|bmp,0','','','')" style="background: #ccc;">
+                <i class="fa fa-plus"></i><span>添加模板</span></a></div>
+</div>
+<script>
+$(".dele-btn").click(function(){
+			$(".wrap").addClass("dele");
+		});
+$(".cancel-btn").click(function(){
+			$(".wrap").removeClass("dele");
+		});
+</script>
+<script src="__PUBLIC__/js/common.js"></script>
+<script type="text/javascript" src="__PLUGINTMPL__js/admin.js"></script>
+
+</body>
+</html>

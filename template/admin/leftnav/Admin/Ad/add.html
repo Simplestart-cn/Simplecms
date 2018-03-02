@@ -1,0 +1,42 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('ad/index')}">{:L('ADMIN_AD_INDEX')}</a></li>
+			<li class="active"><a href="{:U('ad/add')}">{:L('ADMIN_AD_ADD')}</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('ad/add_post')}">
+        
+        
+        	<div class="row-fluid">			
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th width="200">{:L('NAME')}</th>
+                            <td>
+                                <input type="text" name="ad_name" class="form-control">
+                                <span data-toggle="tooltip" data-placement="right" title="" style="" data-original-title="必须填写的字段">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{:L('AD_CONTENT')}</th>
+                            <td>
+                               <textarea name="ad_content" rows="5" cols="57" class="form-control"></textarea>
+                            </td>
+                        </tr>
+                    
+                   </tbody>
+              </table>
+            </div>
+            
+		
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="{:U('ad/index')}">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

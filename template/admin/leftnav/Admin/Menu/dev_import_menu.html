@@ -1,0 +1,31 @@
+<admintpl file="header" />
+<style>
+li {
+	list-style: none;
+}
+</style>
+</head>
+<body>
+
+	<div class="well" style="width:400px; margin: 20px auto;padding: 20px;">
+		<div class="">
+			<h3 style="margin-top: 0;">菜单已同步！</h3>
+			<div class="error_cont">
+				<ul style="padding: 0;">
+					<li>菜单已同步！</li>
+				</ul>
+				<div  style="text-align: right;">
+					<a href="{:U('menu/index')};" class="btn btn-info btn-sm">关闭</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script>
+		var close_timeout = setTimeout(function() {
+			location.href = "{:U('menu/index')}";
+		}, 2000);
+	</script>
+</body>
+</html>

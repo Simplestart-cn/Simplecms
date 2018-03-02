@@ -1,0 +1,24 @@
+<link href="__PLUGINTMPL__/assets/css/widget.css" rel="stylesheet" type="text/css">
+ <php> $position_options=array( '1'=>'right', '2'=>'left' );</php>
+<div id="music" style="{$position_options[$position]}:1%;bottom:{$bottom}%;">
+	<div id="audio_btn" class="off video_exist rotate" style="display: block;"><audio id="bgMusic" src="{$music}" autoplay="autoplay" loop="loop"></audio></div>
+</div>
+
+<script>	
+(function() {
+    // 语音开关
+    var music = document.getElementById("bgMusic");
+
+    $("#audio_btn").click(function(){
+
+        if(music.paused){
+            music.play();
+            $("#audio_btn").removeClass("play").addClass("rotate");
+        }else{
+            music.pause();
+            $("#audio_btn").removeClass("rotate").addClass("play");
+        }
+    });
+
+})();
+</script>
