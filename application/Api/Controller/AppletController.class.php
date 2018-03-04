@@ -21,15 +21,15 @@ class AppletController extends HomebaseController {
 	//默认配置
     protected $config = [
         'url' => "https://api.weixin.qq.com/sns/jscode2session", //微信获取session_key接口url
-        'appid' => C('SP_SDK_WXAPPLET.APP_ID'), // APPId
-        'secret' => C('SP_SDK_WXAPPLET.APP_SECRET'), // 秘钥
+        'appid' => '', // APPId
+        'secret' => '', // 秘钥
         'grant_type' => 'authorization_code', // grant_type，一般情况下固定的
     ];
 
-	function _initialize() {
-		
-	}
-	
+    function _initialize() {
+        $this->config['appid'] = C('SP_SDK_WXAPPLET.APP_ID');
+        $this->config['secret'] = C('SP_SDK_WXAPPLET.APP_SECRET');
+    }	
 	/**
 	 * 微信小程序登录
 	 * @param  [type] $user_info [description]
