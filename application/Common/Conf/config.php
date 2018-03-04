@@ -64,12 +64,6 @@ $configs= array(
         'ERROR_PAGE'            =>'',//不要设置，否则会让404变302
         
         'VAR_SESSION_ID'        => 'session_id',
-        'SESSION_OPTIONS'       => array(
-                                        'name'                =>  'BJYSESSION',   //设置session名
-                                        'expire'              =>  24*3600*7,     //SESSION保存7天，默认
-                                        'use_trans_sid'       =>  1,             //跨页传递
-                                        'use_only_cookies'    =>  0,            //是否只开启基于cookies的session的会话方式
-                                            ),
         
         "UCENTER_ENABLED"		=>0, //UCenter 开启1, 关闭0
         "COMMENT_NEED_CHECK"	=>0, //评论是否需审核 审核1，不审核0
