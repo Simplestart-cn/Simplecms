@@ -66,7 +66,7 @@ class SettingController extends AdminbaseController{
 			$banned_usernames=preg_replace("/[^0-9A-Za-z_\x{4e00}-\x{9fa5}-]/u", ",", $_POST['user_options']['banned_usernames']);
 			$_POST['user_options']['banned_usernames']=$banned_usernames;
 
-			sp_set_ken_setting($_POST['user_options']);
+			sp_set_user_options($_POST['user_options']);
 			
 			if ($r!==false) {
 				$this->success("保存成功！");

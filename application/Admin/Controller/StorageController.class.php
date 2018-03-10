@@ -13,11 +13,10 @@ class StorageController extends AdminbaseController{
 	
 	function setting_post(){
 		if(IS_POST){
-			
 			$support_storages=array("Local","Qiniu");
 			$type=$_POST['type'];
 			if(in_array($type, $support_storages)){
-				$result=sp_set_ken_setting(array('storage'=>$_POST));
+				$result=sp_set_user_options(array('storage'=>$_POST));
 				if($result!==false){
 					sp_set_dynamic_config(array("FILE_UPLOAD_TYPE"=>$type,"UPLOAD_TYPE_CONFIG"=>$_POST[$type]));
 					$this->success("设置成功！");
