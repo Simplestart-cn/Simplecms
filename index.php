@@ -24,7 +24,7 @@ if (ini_get('magic_quotes_gpc')) {
  * 系统调试设置
  * 项目正式部署后请设置为false关闭
  */
-define("APP_DEBUG", false);
+define("APP_DEBUG", true);
 //网站当前路径
 define('SITE_PATH', dirname(__FILE__)."/");
 /**

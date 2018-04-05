@@ -79,7 +79,7 @@ function sp_show_msg($msg, $class = ''){
 }
 
 function sp_update_site_configs($db,$table_prefix){
-    $sitelogo = "/public/images/logo.png";
+    $sitelogo = "/template/public/images/logo.png";
     $sitename=I("post.sitename");
     $email=I("post.manager_email");
     $siteurl=I("post.siteurl");
